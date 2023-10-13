@@ -1,0 +1,40 @@
+.textbox-section{
+    display: flex;
+    flex-direction:column;
+    justify-content: space-evenly;
+    height:100px;
+    width:100%;
+    border:1px solid #565856;
+    border-radius:8px;
+    background: rgb(34,37,41);
+    color:#fff;
+}
+
+.input-text{
+    line-height: 1.46668;
+    font-size: 15px;
+    max-height: calc(60vh - 80px);
+    padding:8px 12px;
+    border:none;
+    outline:none;
+    background:none;
+    color:#fff;
+}
+
+.buttons-area{
+    padding:4px;
+}
+
+.textbtn{
+    background:none;
+    border:none;
+    color:#fff;
+    /* height:1em;
+    width:1em; */
+}
+
+.textbox-lower-section{
+    display:flex;
+    align-items:center ;
+    justify-content: space-around;
+}
