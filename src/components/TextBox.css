@@ -1,13 +1,18 @@
 .textbox-section{
+    padding: 0 20px;
+    background: rgb(40, 42, 45);
+}
+
+.textbox-container{
     display: flex;
     flex-direction:column;
     justify-content: space-evenly;
-    height:100px;
     width:100%;
     border:1px solid #565856;
     border-radius:8px;
-    background: rgb(34,37,41);
+    background: rgb(55, 60, 68);
     color:#fff;
+    padding:4px;
 }
 
 .input-text{
@@ -23,18 +28,56 @@
 
 .buttons-area{
     padding:4px;
+    display:flex;
+    gap:8px;
 }
 
 .textbtn{
     background:none;
     border:none;
-    color:#fff;
-    /* height:1em;
-    width:1em; */
+    color:#c9c7c7;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-size:0.9rem;
+    position:relative;
+    border-radius:2px;
+    width:24px;
+    height:24px;
+    padding:2px;
+}
+
+.textbtn:hover{
+    background:#696969;
+    color:#dcdbdb;
+}
+
+.textbtn-upper{
+    color:#696969;
 }
 
 .textbox-lower-section{
     display:flex;
     align-items:center ;
-    justify-content: space-around;
+    justify-content: space-between;
+}
+
+.confirm-btns{
+    display:flex;
+    gap:10px;
+}
+
+.line-divider{
+    border:1px solid #696969;
+}
+
+.attachments-btn{
+    border-radius:50%;
+    background:#5d5b5b;
+    width:24px;
+    aspect-ratio: 1/1;
+    display:flex;
+    align-items:center ;
+    justify-content: center;
+    padding:0;
 }
