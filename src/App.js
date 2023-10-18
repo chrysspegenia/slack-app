@@ -1,10 +1,12 @@
 import './App.css';
-import Textbox from './components/Textbox';
+// import Textbox from './components/Textbox';
+import Layout from './components/Layout';
 
 function App() {
   return (
     <div className="App">
-      <Textbox />
+      <Layout></Layout>
+      {/* <Textbox /> */}
     </div>
   );
 }
