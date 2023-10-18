@@ -1,0 +1,57 @@
+.navbar-section,
+.navbar-icons-container,
+.user-profile-section,
+.individual-icon-container{
+    display:flex;
+    flex-direction: column;
+    align-items:Center;
+    justify-content: center;
+}
+
+.navbar-section{
+    width:76px;
+    height:100%;
+    padding:8px 0 24px 0;
+    justify-content:space-between;
+    color: #e2dede;
+}
+
+.navbar-icon,
+.create-new-icon,
+.user-icon{
+    width:36px;
+    height:36px;
+    display:grid;
+    place-items: center;
+    border-radius: 8px;
+}
+
+.navbar-icon:hover{
+    background-color: rgba(255,255,255,0.2);
+}
+
+.individual-icon-container{
+    padding: 8px 0;
+    width:52px;
+    height:52px;
+}
+
+.icon-text{
+    font-size:11px;
+    font-weight:700;
+}
+
+.create-new-icon{
+    background-color: rgba(255,255,255,0.2);
+    border-radius:50%;
+    margin-bottom:8px;
+    transition: all 0.2s ease;
+}
+
+.create-new-icon:hover{
+    transform:scale(1.1)
+}
+
+.user-icon{
+    background-color: rgba(255,255,255,0.2);
+}
