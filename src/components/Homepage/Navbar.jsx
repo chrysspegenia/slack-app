@@ -1,6 +1,6 @@
 import React from 'react';
 import './Navbar.css'
-import workspaceLogo from '../../assets/slack-logo.png'
+import workspaceLogo from '../../assets/images/slack-logo.png'
 
 const Navbar = () => {
     return (
