@@ -1,15 +1,15 @@
 import React from 'react';
 import './Homepage.css'
-import Textbox from '../components/Homepage/Textbox';
 import SearchBox from '../components/Homepage/SearchBox';
 import Navbar from '../components/Homepage/Navbar'
+import Workspace from '../components/Homepage/Workspace';
 
 const Homepage = () => {
     return (
         <div className='homepage'>
             <SearchBox></SearchBox>
-            <Textbox></Textbox>
             <Navbar></Navbar>
+            <Workspace></Workspace>
         </div>
     );
 };

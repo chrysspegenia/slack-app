@@ -12,3 +12,7 @@
 .navbar-section{
     grid-area: 2 / 1 / 3 / 2;
 }
+
+.workspace-section{
+    grid-area: 2 / 2 / 3 / 3;
+}
