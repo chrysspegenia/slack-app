@@ -30,7 +30,10 @@
 }
 
 .header-btns-container,
-.header-btn{
+.header-btn,
+.comms-logo,
+.comms-header-logo,
+.direct-msg-icon{
     display: flex;
     align-items:center;
     justify-content: center;
@@ -43,6 +46,57 @@
 }
 
 .workspace-header:hover,
-.header-btn:hover{
+.header-btn:hover,
+.comms-links:hover,
+.channels:hover,
+.comms-title:hover,
+.comms-header-logo:hover,
+.direct-msg-icon:hover{
     background-color: rgba(255,255,255,0.1);
+}
+
+.nav-comms-content{
+    display:flex;
+    flex-direction: column;
+    padding:8px;
+}
+
+.comms-links,
+.comms-header,
+.channels{
+    height:28px;
+    line-height:28px;
+    border-radius:6px;
+    padding:0 10px 0 16px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.comms-header{
+    margin-top:20px;
+    padding: 0 10px;
+    gap:0;
+    position:relative;
+}
+
+.comms-header-logo{
+    width:28px;
+    height:28px;
+    font-size:13px;
+    border-radius:6px;
+}
+
+.comms-title{
+    padding:0 5px;
+    border-radius:6px;
+    box-sizing: border-box;
+}
+
+.direct-msg-icon{
+    position:absolute;
+    right:10px;
+    width:28px;
+    height:28px;
+    border-radius:6px;
 }
