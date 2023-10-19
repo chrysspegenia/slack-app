@@ -14,6 +14,7 @@
     padding:8px 0 24px 0;
     justify-content:space-between;
     color: #e2dede;
+    box-sizing: border-box;
 }
 
 .navbar-icon,

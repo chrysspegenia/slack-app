@@ -1,11 +1,11 @@
 import './App.css';
 // import Textbox from './components/Textbox';
-import Layout from './pages/Layout';
+import Homepage from './pages/Homepage';
 
 function App() {
   return (
     <div className="App">
-      <Layout></Layout>
+      <Homepage></Homepage>
       {/* <Textbox /> */}
     </div>
   );
