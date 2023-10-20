@@ -16,3 +16,11 @@
 .workspace-section{
     grid-area: 2 / 2 / 3 / 3;
 }
+
+.channels{
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    background-color: blue;
+    z-index: 100;
+}
