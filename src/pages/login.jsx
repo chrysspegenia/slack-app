@@ -56,9 +56,7 @@ function Login(){
     }
 
     return (
-        <div className="login-page-main-container">
-            <h1>Slack</h1>
-            <div className="login-container">
+        <div className="login">
             { 
                 !isLoggedIn && 
                 <form className="login" onSubmit={handleSubmit}>
@@ -78,8 +76,6 @@ function Login(){
                 </form>
             }
             {isLoggedIn && <Homepage setIsLoggedIn={setIsLoggedIn} user={user}></Homepage>}
-            </div>
-           
         </div>
     );
 };

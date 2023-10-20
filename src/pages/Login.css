@@ -1,4 +1,4 @@
-.login-page-main-container {
+.login{
     height: 100vh;
     width: 100%;
     background:linear-gradient(45deg,rgb(108, 37, 37), rgb(27, 27, 110));
@@ -7,21 +7,4 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-}
-
-.login-container{
-    height: 200px;
-    width: 200px;
-    justify-content: center;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    border: 2px solid white;
-}
-
-h1 {
-    font-size: 200px;
-    font-weight: 400;
-    margin: 0;
 }
