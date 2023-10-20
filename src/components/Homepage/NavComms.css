@@ -103,9 +103,8 @@
 }
 
 .direct-msg-icon{
-    position:absolute;
-    right:10px;
     width:28px;
     height:28px;
     border-radius:6px;
+    margin-left: 40px;
 }
