@@ -5,7 +5,7 @@ const MessageArea = () => {
     return (
         <div className='messages-section'>
             <div className='messages-header-section'>
-                <span className='messages-header'>Channel name / message receiver <i class="arrow-down fa-solid fa-angle-down"></i></span>
+                <span className='messages-header'>Channel name / message receiver <i className="arrow-down fa-solid fa-angle-down"></i></span>
             </div>
 
             <div className='messages-content'>

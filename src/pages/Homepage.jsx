@@ -10,40 +10,40 @@ import { API_URL } from "../constants/Constants";
 
 const Homepage = (props) => {
     const { setIsLoggedIn, user } = props;
-    const [channels, setChannels] = useState([]);
+    // const [channels, setChannels] = useState([]);
     
-        useEffect(() => {
-            if (user) {
-                getChannels();
-            }
-        }, [user]);
+        // useEffect(() => {
+        //     if (user) {
+        //         getChannels();
+        //     }
+        // }, [user]);
     
         function logout(){
             localStorage.clear();
             setIsLoggedIn(false);
         }
     
-        async function getChannels(){
-            try {
-                const response = await axios.get(`${API_URL}/channels`, {
-                    headers: {
-                        "access-token": user.accessToken,
-                        client: user.client,
-                        expiry: user.expiry,
-                        uid: user.uid
-                    }
-                });
-                const { data } = response;
-                if(data){
-                    setChannels(data.data);
-                }
-            } catch (error) {
-                if(error.response.data.errors){
-                    return alert("Invalid credentials");
-                }
-            }
-    
-    } ;
+        // async function getChannels(){
+        //     try {
+        //         const response = await axios.get(`${API_URL}/channels`, {
+        //             headers: {
+        //                 "access-token": user.accessToken,
+        //                 client: user.client,
+        //                 expiry: user.expiry,
+        //                 uid: user.uid
+        //             }
+        //         });
+        //         const { data } = response;
+        //         if(data){
+        //             setChannels(data.data);
+        //         }
+        //     } catch (error) {
+        //         if(error.response.data.errors){
+        //             return alert("Invalid credentials");
+        //         }
+        //     }
+    // } ;
+
     return (
         <div className='homepage'>
             {/* <div className='channels'>
@@ -67,7 +67,10 @@ const Homepage = (props) => {
     
             <SearchBox></SearchBox>
             <Navbar></Navbar>
-            <Workspace channels={channels}></Workspace>
+            <Workspace 
+                user={user}
+                API_URL={API_URL}
+            ></Workspace>
         </div>
     );
 };
