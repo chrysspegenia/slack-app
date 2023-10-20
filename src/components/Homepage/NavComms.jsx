@@ -24,7 +24,7 @@ const NavComms = () => {
                     </div>
                     <div className='channels-container'>
                         {/* added channels here */}
-                        <div className='channels'>
+                        <div className='add-channels'>
                             <i className="comms-logo fa-solid fa-plus"></i>
                             Add channels
                         </div>

@@ -48,7 +48,7 @@
 .workspace-header:hover,
 .header-btn:hover,
 .comms-links:hover,
-.channels:hover,
+.add-channels:hover,
 .comms-title:hover,
 .comms-header-logo:hover,
 .direct-msg-icon:hover{
@@ -63,7 +63,7 @@
 
 .comms-links,
 .comms-header,
-.channels{
+.add-channels{
     height:28px;
     line-height:28px;
     border-radius:6px;
