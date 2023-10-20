@@ -1,20 +1,50 @@
-import React from 'react';
+import {useState, useEffect} from 'react';
 import './NavComms.css'
+import axios from "axios";
 
 const NavComms = (props) => {
+    const {channels, setChannels, user, API_URL} = props
+
+    useEffect(() => {
+        if (user) {
+            getChannels();
+        }
+    }, [user]);
+
+    async function getChannels(){
+        try {
+            const response = await axios.get(`${API_URL}/channels`, {
+                headers: {
+                    "access-token": user.accessToken,
+                    client: user.client,
+                    expiry: user.expiry,
+                    uid: user.uid
+                }
+            });
+            const { data } = response;
+            if(data){
+                setChannels(data.data);
+            }
+        } catch (error) {
+            if(error.response.data.errors){
+                return alert("Invalid credentials");
+            }
+        }
+    }
+
     return (
         <div className='nav-communications'>
             <div className='workspace-header-section'>
-                <span className='workspace-header'>Workspace <i class="arrow-down fa-solid fa-angle-down"></i></span>
+                <span className='workspace-header'>Workspace <i className="arrow-down fa-solid fa-angle-down"></i></span>
                 <div className='header-btns-container'>
-                    <i class="header-btn fa-solid fa-bars"></i>
-                    <i class="header-btn fa-regular fa-pen-to-square"></i>
+                    <i className="header-btn fa-solid fa-bars"></i>
+                    <i className="header-btn fa-regular fa-pen-to-square"></i>
                 </div>
             </div>
             
             <div className='nav-comms-content'>    
                 <div className='comms-links'><i className="fa-regular fa-comment-dots"></i>Threads</div>
-                <div className='comms-links'><i class="fa-regular fa-paper-plane"></i>Drafts & sent</div>
+                <div className='comms-links'><i className="fa-regular fa-paper-plane"></i>Drafts & sent</div>
 
                 {/* Contains channels and create channel */}
                 <div className='channel-section'>
@@ -24,7 +54,7 @@ const NavComms = (props) => {
                     </div>
                     <div className='channels-container'>
                         {/* added channels here */}
-                        {props.channels && props.channels.map((channel) => {
+                        {channels && channels.map((channel) => {
                                 const {id, name, owner_id} = channel;
                                 return (
                                     <div className='channels' key={id}>
@@ -36,7 +66,7 @@ const NavComms = (props) => {
                                 })
                             }
                             {/* if account has no channels this will display */}
-                            { !props.channels && <div className='channels'>No channels yet</div> }
+                            { !channels && <div className='channels'>No channels yet</div> }
 
                         <div className='add-channels'>
                             <i className="comms-logo fa-solid fa-plus"></i>
@@ -49,7 +79,7 @@ const NavComms = (props) => {
                     <div className='comms-header'>
                         <i className="comms-header-logo fa-solid fa-caret-down"></i>
                         <span className='comms-title'>Direct message</span>
-                        <i class="direct-msg-icon fa-solid fa-plus"></i>
+                        <i className="direct-msg-icon fa-solid fa-plus"></i>
                     </div>
                     <div className='channels-container'>
                         {/* added direct messages here */}
