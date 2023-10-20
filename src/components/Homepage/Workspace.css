@@ -15,3 +15,7 @@
     grid-area: 2 / 2 / 3 / 3;
 }
 
+.message-section{
+    grid-area: 1 / 2 / 2 / 3;
+}
+
