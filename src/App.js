@@ -1,14 +1,16 @@
 import './App.css';
 // import Textbox from './components/Textbox';
+import React from 'react';
+import { useState } from "react";
 import Homepage from './pages/Homepage';
 import Login from './pages/login';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <div className="App">
-      <Login></Login>
-      {/* <Homepage></Homepage> */}
-      {/* <Textbox /> */}
+      {isLoggedIn ? <Homepage /> : <Login setIsLoggedIn={setIsLoggedIn} />}
     </div>
   );
 }
