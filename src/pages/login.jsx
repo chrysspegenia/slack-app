@@ -56,10 +56,12 @@ function Login(){
     }
 
     return (
-        <div className="login">
+        <div className="login-page-main-container">
+            <h1>Slack</h1>
+            <div className="login-container">
             { 
                 !isLoggedIn && 
-                <form onSubmit={handleSubmit}>
+                <form className="login" onSubmit={handleSubmit}>
                     <label>Email:</label>
                     <input
                         type="email"
@@ -76,6 +78,8 @@ function Login(){
                 </form>
             }
             {isLoggedIn && <Homepage setIsLoggedIn={setIsLoggedIn} user={user}></Homepage>}
+            </div>
+           
         </div>
     );
 };
