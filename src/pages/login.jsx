@@ -18,7 +18,8 @@ function Login(){
             setIsLoggedIn(true);
             localStorage.setItem("user", JSON.stringify(user));
         }
-    }, [user])
+    }, [user]);
+
     async function handleSubmit(event){
         event.preventDefault();
 
@@ -56,7 +57,9 @@ function Login(){
     }
 
     return (
-        <div className="login">
+        <div className="login-page-main-container">
+             {!isLoggedIn && <h1>Slack</h1>}    
+            <div className="login-container">
             { 
                 !isLoggedIn && 
                 <form className="login" onSubmit={handleSubmit}>
@@ -76,6 +79,7 @@ function Login(){
                 </form>
             }
             {isLoggedIn && <Homepage setIsLoggedIn={setIsLoggedIn} user={user}></Homepage>}
+            </div>       
         </div>
     );
 };

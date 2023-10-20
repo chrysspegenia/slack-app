@@ -1,5 +1,5 @@
-.login{
-    height: 100vh;
+.login-page-main-container {
+    height: 100%;
     width: 100%;
     background:linear-gradient(45deg,rgb(108, 37, 37), rgb(27, 27, 110));
     color: white;
@@ -7,4 +7,31 @@
     align-items: center;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+}
+
+.login-container{
+    height: 100vh;
+    width: 100%;
+}
+
+.login{
+    height: 150px;
+    width: 200px;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 2px solid white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+h1 {
+    font-size: 200px;
+    font-weight: 400;
+    margin: 0;
 }

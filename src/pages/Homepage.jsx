@@ -11,6 +11,7 @@ import { API_URL } from "../constants/Constants";
 const Homepage = (props) => {
     const { setIsLoggedIn, user } = props;
     const [channels, setChannels] = useState([]);
+    console.log("User prop:", user);
     
         useEffect(() => {
             if (user) {
