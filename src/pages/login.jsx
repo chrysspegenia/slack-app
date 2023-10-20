@@ -79,7 +79,7 @@ function Login(){
                 </form>
             }
             {isLoggedIn && <Homepage setIsLoggedIn={setIsLoggedIn} user={user}></Homepage>}
-            </div>       
+            </div>     
         </div>
     );
 };
