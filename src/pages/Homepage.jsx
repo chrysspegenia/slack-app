@@ -46,7 +46,7 @@ const Homepage = (props) => {
     } ;
     return (
         <div className='homepage'>
-            <div className='channels'>
+            {/* <div className='channels'>
             {   channels && 
                 channels.map((channel) => {
                     const {id, name, owner_id} = channel;
@@ -61,10 +61,13 @@ const Homepage = (props) => {
             }
             { !channels && <div>No channels yet</div> }
             <button onClick={logout}>Logout</button>
-            </div>               
+            </div>                */}
+            
+            <button onClick={logout}>Logout</button>
+    
             <SearchBox></SearchBox>
             <Navbar></Navbar>
-            <Workspace></Workspace>
+            <Workspace channels={channels}></Workspace>
         </div>
     );
 };

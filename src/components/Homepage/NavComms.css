@@ -53,7 +53,8 @@
 .add-channels:hover,
 .comms-title:hover,
 .comms-header-logo:hover,
-.direct-msg-icon:hover{
+.direct-msg-icon:hover,
+.channels:hover{
     background-color: rgba(255,255,255,0.1);
 }
 
@@ -65,7 +66,8 @@
 
 .comms-links,
 .comms-header,
-.add-channels{
+.add-channels,
+.channels{
     height:28px;
     line-height:28px;
     border-radius:6px;
@@ -73,6 +75,11 @@
     display:flex;
     align-items:center;
     gap:10px;
+    cursor:pointer;
+}
+
+.channels{
+    padding-left:42px;
 }
 
 .comms-header{

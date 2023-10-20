@@ -1,7 +1,7 @@
 import React from 'react';
 import './NavComms.css'
 
-const NavComms = () => {
+const NavComms = (props) => {
     return (
         <div className='nav-communications'>
             <div className='workspace-header-section'>
@@ -24,6 +24,17 @@ const NavComms = () => {
                     </div>
                     <div className='channels-container'>
                         {/* added channels here */}
+                        {props.channels && props.channels.map((channel) => {
+                                const {id, name, owner_id} = channel;
+                                return (
+                                    <div className='channels' key={id}>
+                                        {/* <p>Channel ID: {id}</p> */}
+                                        <p>{name}</p>
+                                        {/* <p>Owner ID: {owner_id}</p> */}
+                                    </div>
+                                )
+                            })
+                        }
                         <div className='add-channels'>
                             <i className="comms-logo fa-solid fa-plus"></i>
                             Add channels

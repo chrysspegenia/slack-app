@@ -4,12 +4,12 @@ import Textbox from './Textbox';
 import NavComms from './NavComms';
 import MessageArea from './MessageArea';
 
-const Workspace = () => {
+const Workspace = (props) => {
     return (
         <div className='workspace-section'>
             <Textbox></Textbox>
             <MessageArea></MessageArea>
-            <NavComms></NavComms>
+            <NavComms channels={props.channels}></NavComms>
         </div>
     );
 };
