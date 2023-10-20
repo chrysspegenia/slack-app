@@ -32,9 +32,12 @@ const NavComms = (props) => {
                                         <p>{name}</p>
                                         {/* <p>Owner ID: {owner_id}</p> */}
                                     </div>
-                                )
-                            })
-                        }
+                                    )
+                                })
+                            }
+                            {/* if account has no channels this will display */}
+                            { !props.channels && <div className='channels'>No channels yet</div> }
+
                         <div className='add-channels'>
                             <i className="comms-logo fa-solid fa-plus"></i>
                             Add channels
