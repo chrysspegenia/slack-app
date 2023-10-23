@@ -4,14 +4,12 @@ import Homepage from "./Homepage";
 import { API_URL } from '../constants/Constants';
 import axios from 'axios';
 
-function Login(){
+function Login(props){
+    const { user, setUser } = props;
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [passwordConfirmation, setPasswordConfirmation] = useState();
-    const [user, setUser] = useState(
-        () => JSON.parse(localStorage.getItem("user") || null)
-    );
 
 
     useEffect(() => {

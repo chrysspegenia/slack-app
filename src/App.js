@@ -6,11 +6,18 @@ import Homepage from './pages/Homepage';
 import Login from './pages/login';
 
 function App() {
+  const [user, setUser] = useState(
+    () => JSON.parse(localStorage.getItem("user") || null)
+  );
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <div className="App">
-      {isLoggedIn ? <Homepage /> : <Login setIsLoggedIn={setIsLoggedIn} />}
+      {isLoggedIn ? (
+        <Homepage user={user} setIsLoggedIn={setIsLoggedIn} />
+      ) : (
+        <Login user={user} setUser={setUser} setIsLoggedIn={setIsLoggedIn} />
+      )}
     </div>
   );
 }
