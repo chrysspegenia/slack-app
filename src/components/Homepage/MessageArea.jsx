@@ -8,27 +8,6 @@ const MessageArea = (props) => {
 
     const[displayConversation, setDisplayConversation] = useState([])
 
-    // async function displayMessages(){
-    //     try {
-    //         const response = await axios.get(`${API_URL}/channels`, {
-    //             headers: {
-    //                 "access-token": user.accessToken,
-    //                 client: user.client,
-    //                 expiry: user.expiry,
-    //                 uid: user.uid
-    //             }
-    //         });
-    //         const { data } = response;
-    //         if(data){
-    //             setChannels(data.data);
-    //         }
-    //     } catch (error) {
-    //         if(error.response.data.errors){
-    //             return alert("Invalid credentials");
-    //         }
-    //     }
-    // }
-
     useEffect(() => {
         if (user) {
             handleDisplayConversation();

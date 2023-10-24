@@ -7,6 +7,7 @@ import MessageArea from './MessageArea';
 const Workspace = (props) => {
     const {user, API_URL} = props
     const [channels, setChannels] = useState([]);
+    const [messageAreaName, setMessageAreaName] = useState("Welcome to Slack")
     const [sendMessage, setSendMessage] = useState("");
     const [messageTarget, setMessageTarget] = useState({'receiver_id':'', 
                                                         'receiver_class':''})
@@ -23,12 +24,14 @@ const Workspace = (props) => {
             <MessageArea
                 user={user}
                 API_URL={API_URL}
+                messageAreaName={messageAreaName}
             ></MessageArea>
             <NavComms 
                 messageTarget={messageTarget}
                 setMessageTarget={setMessageTarget}
                 channels={channels}
                 setChannels={setChannels}
+                setMessageAreaName={setMessageAreaName}
                 user={user}
                 API_URL={API_URL}
             ></NavComms>

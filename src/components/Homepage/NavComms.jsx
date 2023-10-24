@@ -3,7 +3,7 @@ import './NavComms.css'
 import axios from "axios";
 
 const NavComms = (props) => {
-    const {channels, setChannels, user, API_URL, messageTarget, setMessageTarget} = props
+    const {channels, setChannels, user, API_URL, messageTarget, setMessageTarget, setMessageAreaName} = props
 
     useEffect(() => {
         if (user) {
@@ -45,6 +45,11 @@ const NavComms = (props) => {
         console.log(messageTarget);
     }, [messageTarget]);
 
+    function handleMessageAreaName(name){
+        setMessageAreaName(name)
+    }
+
+
     return (
         <div className='nav-communications'>
             <div className='workspace-header-section'>
@@ -71,7 +76,10 @@ const NavComms = (props) => {
                                 const {id, name, owner_id} = channel;
                                 return (
                                     <div className='channels' key={id}
-                                        onDoubleClick={() => handleMessageTarget(channel)}>
+                                        onDoubleClick={() => {
+                                            handleMessageTarget(channel)
+                                            handleMessageAreaName(name)
+                                        }}>
                                         {/* <p>Channel ID: {id}</p> */}
                                         <p>{name}</p>
                                         {/* <p>Owner ID: {owner_id}</p> */}
