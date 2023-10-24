@@ -16,7 +16,7 @@ const Textbox = (props) => {
                 //spicy id 4084
                 // 4133 testkeroy,
                 // 4106 mekusmekus
-                'receiver_id':4106, 
+                'receiver_id':4139, 
                 'receiver_class':'User',
                 'body': sendMessage
             }
@@ -29,10 +29,8 @@ const Textbox = (props) => {
                     uid: user.uid
                 }
             });
-           
-            console.log("first" + sendMessage);
-            setSendMessage("");
-            console.log("second" + sendMessage);
+
+           setSendMessage("")
 
         } catch (error){
             alert(error)
@@ -62,7 +60,8 @@ const Textbox = (props) => {
                     className="input-text" 
                     type="text" 
                     placeholder='Message'
-                    onChange = {(event) => {setSendMessage(event.target.value)}}
+                    value={sendMessage}
+                    onChange = {(event) => setSendMessage(event.target.value)}
                 >
                 </textarea>
 

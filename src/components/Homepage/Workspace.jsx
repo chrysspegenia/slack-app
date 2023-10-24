@@ -24,8 +24,6 @@ const Workspace = (props) => {
             <NavComms 
                 channels={channels}
                 setChannels={setChannels}
-                sendMessage={sendMessage}
-                setSendMessage={setSendMessage}
                 user={user}
                 API_URL={API_URL}
             ></NavComms>
