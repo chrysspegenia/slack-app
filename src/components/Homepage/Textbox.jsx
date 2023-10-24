@@ -3,7 +3,7 @@ import './Textbox.css';
 
 const Textbox = (props) => {
 
-    const {sendMessage, setSendMessage, user, API_URL} = props
+    const {sendMessage, setSendMessage, user, API_URL, messageTarget} = props
 
     async function handleSendMessage(){
         
@@ -16,9 +16,10 @@ const Textbox = (props) => {
                 //spicy id 4084
                 // 4133 testkeroy,
                 // 4106 mekusmekus
-                'receiver_id':4139, 
-                'receiver_class':'User',
-                'body': sendMessage
+                // 'receiver_id':4139, 
+                // 'receiver_class':'User',
+                'body': sendMessage,
+                ...messageTarget  //containes receiver_id and receiver_class
             }
 
             await axios.post(`${API_URL}/messages`, receiverInfo, {
