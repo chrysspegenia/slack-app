@@ -14,9 +14,15 @@ function App() {
   return (
     <div className="App">
       {isLoggedIn ? (
-        <Homepage user={user} setIsLoggedIn={setIsLoggedIn} />
+        <Homepage 
+          user={user} 
+          setIsLoggedIn={setIsLoggedIn} 
+        />
       ) : (
-        <Login user={user} setUser={setUser} setIsLoggedIn={setIsLoggedIn} />
+        <Login 
+          user={user} 
+          setUser={setUser} 
+          setIsLoggedIn={setIsLoggedIn} />
       )}
     </div>
   );

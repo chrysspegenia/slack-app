@@ -1,7 +1,44 @@
-import React from 'react';
-import './Textbox.css'
+import axios from 'axios';
+import './Textbox.css';
 
-const Textbox = () => {
+const Textbox = (props) => {
+
+    const {sendMessage, setSendMessage, user, API_URL} = props
+
+    async function handleSendMessage(){
+        
+        if(!sendMessage) return;
+
+        try{
+
+            const receiverInfo ={
+                // mekus2@biryani.com id 4139
+                //spicy id 4084
+                // 4133 testkeroy,
+                // 4106 mekusmekus
+                'receiver_id':4106, 
+                'receiver_class':'User',
+                'body': sendMessage
+            }
+
+            await axios.post(`${API_URL}/messages`, receiverInfo, {
+                headers: {
+                    "access-token": user.accessToken,
+                    client: user.client,
+                    expiry: user.expiry,
+                    uid: user.uid
+                }
+            });
+           
+            console.log("first" + sendMessage);
+            setSendMessage("");
+            console.log("second" + sendMessage);
+
+        } catch (error){
+            alert(error)
+        }
+    }
+
     return (
         <div className="textbox-section">
             <div className="textbox-container">
@@ -21,7 +58,13 @@ const Textbox = () => {
                     <button className='textbtn textbtn-upper codeblock-btn'><i className="fa-solid fa-laptop-code"></i></button>
                 </div>
 
-                <textarea className="input-text" type="text" placeholder='Message'></textarea>
+                <textarea 
+                    className="input-text" 
+                    type="text" 
+                    placeholder='Message'
+                    onChange = {(event) => {setSendMessage(event.target.value)}}
+                >
+                </textarea>
 
                 <div className='textbox-lower-section'>
                     <div className='buttons-area'>
@@ -36,7 +79,12 @@ const Textbox = () => {
                         <button className='textbtn shortcut-btn'><i className="fa-regular fa-square"></i></button>
                     </div>
                     <div className='confirm-btns'>
-                        <div className='textbtn send-btn'><i className="fa-solid fa-paper-plane"></i></div>
+                        <div className='textbtn send-btn'
+                            type="submit"
+                            onClick={handleSendMessage}
+                        >
+                            <i className="fa-solid fa-paper-plane"></i>
+                        </div>
                         <span className="line-divider"></span>
                         <i className="textbtn fa-solid fa-chevron-down"></i>
                     </div>
