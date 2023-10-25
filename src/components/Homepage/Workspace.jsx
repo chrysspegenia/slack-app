@@ -9,8 +9,8 @@ const Workspace = (props) => {
     const [channels, setChannels] = useState([]);
     const [messageAreaName, setMessageAreaName] = useState("Welcome to Slack")
     const [sendMessage, setSendMessage] = useState("");
-    const [messageTarget, setMessageTarget] = useState({'receiver_id':'', 
-                                                        'receiver_class':''})
+    const [messageTarget, setMessageTarget] = useState({'receiver_id':5084, 
+                                                        'receiver_class':'Channel'})
     
     return (
         <div className='workspace-section'>
@@ -25,6 +25,7 @@ const Workspace = (props) => {
                 user={user}
                 API_URL={API_URL}
                 messageAreaName={messageAreaName}
+                messageTarget={messageTarget}
             ></MessageArea>
             <NavComms 
                 messageTarget={messageTarget}
