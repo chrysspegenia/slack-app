@@ -34,7 +34,7 @@
 .messages-content{
     overflow:auto;
     /* padding:8px 20px; */
-    max-height:464px; /*The value should be dynamic*/
+    max-height:33.5vw; /*The value should be dynamic*/
     display:flex;
     flex-direction: column;
 }
