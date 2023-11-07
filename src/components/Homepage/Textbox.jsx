@@ -3,7 +3,7 @@ import './Textbox.css';
 
 const Textbox = (props) => {
 
-    const {sendMessage, setSendMessage, user, API_URL, messageTarget} = props
+    const {sendMessage, setSendMessage, user, API_URL, messageTarget, handleDisplayConversation} = props
 
     async function handleSendMessage(){
         
@@ -81,7 +81,10 @@ const Textbox = (props) => {
                     <div className='confirm-btns'>
                         <div className='textbtn send-btn'
                             type="submit"
-                            onClick={handleSendMessage}
+                            onClick={() => {
+                                handleSendMessage()
+                                handleDisplayConversation()
+                            }}
                         >
                             <i className="fa-solid fa-paper-plane"></i>
                         </div>

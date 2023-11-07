@@ -3,7 +3,7 @@ import './NavComms.css'
 import axios from "axios";
 
 const NavComms = (props) => {
-    const {channels, setChannels, user, API_URL, messageTarget, setMessageTarget, setMessageAreaName} = props
+    const {channels, setChannels, user, API_URL, messageTarget, setMessageTarget, setMessageAreaName, handleDisplayConversation} = props
 
     useEffect(() => {
         if (user) {
@@ -26,29 +26,21 @@ const NavComms = (props) => {
                 setChannels(data.data);
             }
         } catch (error) {
-            if(error.response.data.errors){
+            if(error){
                 return alert("Invalid credentials");
             }
         }
     }
 
-    //function updates message target info 
-    function handleMessageTarget(channel){    
+    //function updates message target info, rerenders the conversationDisplay 
+    function handleMessageTarget(channel){
         setMessageTarget({
             'receiver_id': channel.id, 
             'receiver_class':'Channel',
         })
+        setMessageAreaName(channel.name)
+        handleDisplayConversation()
     }
-
-    //Delete after completing functionalities
-    useEffect(() => {
-        console.log(messageTarget);
-    }, [messageTarget]);
-
-    function handleMessageAreaName(name){
-        setMessageAreaName(name)
-    }
-
 
     return (
         <div className='nav-communications'>
@@ -76,13 +68,14 @@ const NavComms = (props) => {
                                 const {id, name, owner_id} = channel;
                                 return (
                                     <div className='channels' key={id}
+                                        // onClick={() => handleMessageTarget(channel)}
                                         onDoubleClick={() => {
                                             handleMessageTarget(channel)
-                                            handleMessageAreaName(name)
-                                        }}>
-                                        {/* <p>Channel ID: {id}</p> */}
+                                            // handleMessageAreaName(name)
+                                            // handleDisplayConversation()
+                                        }}
+                                        >
                                         <p>{name}</p>
-                                        {/* <p>Owner ID: {owner_id}</p> */}
                                     </div>
                                     )
                                 })
