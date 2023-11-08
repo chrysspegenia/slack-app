@@ -54,7 +54,8 @@
 .comms-title:hover,
 .comms-header-logo:hover,
 .direct-msg-icon:hover,
-.channels:hover{
+.channels:hover,
+.user:hover{
     background-color: rgba(255,255,255,0.1);
 }
 
@@ -67,7 +68,8 @@
 .comms-links,
 .comms-header,
 .add-channels,
-.channels{
+.channels,
+.user{
     height:28px;
     line-height:28px;
     border-radius:6px;
@@ -78,7 +80,8 @@
     cursor:pointer;
 }
 
-.channels{
+.channels,
+.user{
     padding-left:42px;
 }
 
@@ -107,4 +110,10 @@
     height:28px;
     border-radius:6px;
     margin-left: 40px;
+}
+
+.users-container{
+    overflow-y:auto;
+    overflow-x: hidden;
+    max-height:50vh;
 }

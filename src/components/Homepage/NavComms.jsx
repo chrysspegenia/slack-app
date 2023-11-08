@@ -3,11 +3,17 @@ import './NavComms.css'
 import axios from "axios";
 
 const NavComms = (props) => {
-    const {channels, setChannels, user, API_URL, messageTarget, setMessageTarget, setMessageAreaName, handleDisplayConversation} = props
+    const {channels, setChannels, user, API_URL, setMessageTarget, setMessageAreaName, handleDisplayConversation, directMessageUsers, setDirectMessageUsers} = props
 
     useEffect(() => {
         if (user) {
             getChannels();
+        }
+    }, [user]);
+
+    useEffect(() => {
+        if (user) {
+            getUsers();
         }
     }, [user]);
 
@@ -28,6 +34,28 @@ const NavComms = (props) => {
         } catch (error) {
             if(error){
                 return alert("Invalid credentials");
+            }
+        }
+    }
+
+    async function getUsers(){
+        try{
+            const response = await axios.get(`${API_URL}/users`, {
+                headers: {
+                    "access-token": user.accessToken,
+                    client: user.client,
+                    expiry: user.expiry,
+                    uid: user.uid
+                }
+            });
+            const users = response.data.data;
+            setDirectMessageUsers(users.filter((user) => {
+                return user.id >= 4000
+            }))
+        } catch (error) {
+            if(error){
+                // include proper error
+                return alert("cant get users");
             }
         }
     }
@@ -65,7 +93,7 @@ const NavComms = (props) => {
                     <div className='channels-container'>
                         {/* added channels here */}
                         {channels && channels.map((channel) => {
-                                const {id, name, owner_id} = channel;
+                                const {id, name} = channel;
                                 return (
                                     <div className='channels' key={id}
                                         // onClick={() => handleMessageTarget(channel)}
@@ -96,8 +124,13 @@ const NavComms = (props) => {
                         <span className='comms-title'>Direct message</span>
                         <i className="direct-msg-icon fa-solid fa-plus"></i>
                     </div>
-                    <div className='channels-container'>
-                        {/* added direct messages here */}
+                    <div className='users-container'>
+                        {directMessageUsers && directMessageUsers.map((user) => {
+                            const{id, email} = user;
+                                return (
+                                    <div className="user" key={id}><p>{email}</p><p>{id}</p></div>
+                                )
+                        })}
                     </div>
                 </div>
             </div>

@@ -8,14 +8,15 @@ import axios from 'axios';
 const Workspace = (props) => {
     const {user, API_URL} = props
     const [channels, setChannels] = useState([]);
+    const [directMessageUsers, setDirectMessageUsers] = useState([]);
     const [messageAreaName, setMessageAreaName] = useState("Welcome to Slack")
     const [sendMessage, setSendMessage] = useState("");
     const [messageTarget, setMessageTarget] = useState({'receiver_id':"", 
-                                                        'receiver_class':'Channel'})
+                                                        'receiver_class':''})
     const{ receiver_id, receiver_class} = messageTarget
     const[displayConversation, setDisplayConversation] = useState([])
 
-    //Need proper dependency to display properly
+    //Need proper dependency to display conversation properly
     useEffect(() => {
         handleDisplayConversation()
     }, [receiver_id])
@@ -60,10 +61,11 @@ const Workspace = (props) => {
                 displayConversation={displayConversation}
             ></MessageArea>
             <NavComms 
-                messageTarget={messageTarget}
                 setMessageTarget={setMessageTarget}
                 channels={channels}
                 setChannels={setChannels}
+                directMessageUsers={directMessageUsers}
+                setDirectMessageUsers={setDirectMessageUsers}
                 setMessageAreaName={setMessageAreaName}
                 user={user}
                 API_URL={API_URL}
