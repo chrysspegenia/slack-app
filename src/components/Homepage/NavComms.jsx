@@ -14,6 +14,7 @@ const NavComms = (props) => {
     useEffect(() => {
         if (user) {
             getUsers();
+            // getExistingUsersDM();
         }
     }, [user]);
 
@@ -60,13 +61,52 @@ const NavComms = (props) => {
         }
     }
 
+    // const {usersDM, setUsersDM} = useState([]) 
+
+    // // //function to loop over all accounts id's to retrieve accounts that has sent message to user
+    // async function getExistingUsersDM(){
+    //     for(const user of directMessageUsers){
+    //     try {
+    //         const response = await axios.get(`${API_URL}/messages?receiver_id=${user.id}&receiver_class=User`, {
+    //             headers: {
+    //                 "access-token": user.accessToken,
+    //                 client: user.client,
+    //                 expiry: user.expiry,
+    //                 uid: user.uid
+    //             }
+    //         });
+    //         const users = response.data.data;
+    //         // if(users.length !== 0){
+    //         //     continue; //skip to the next user if there are no messages
+    //         // }
+    //         //     setUsersDM(users)
+    //         //     console.log(usersDM)
+    //         console.log(users)
+    //     } catch (error) {
+    //         if(error){
+    //             return alert("problem retreiving users with direct dm");
+    //         }
+    //     }
+    //     }
+    // }
+    // getExistingUsersDM()
+
     //function updates message target info, rerenders the conversationDisplay 
     function handleMessageTarget(channel){
         setMessageTarget({
-            'receiver_id': channel.id, 
+            'receiver_id': channel.id,
             'receiver_class':'Channel',
         })
         setMessageAreaName(channel.name)
+        handleDisplayConversation()
+    }
+
+    function handleMessageTargetDM(user){
+        setMessageTarget({
+            'receiver_id': user.id,
+            'receiver_class':'User',
+        })
+        setMessageAreaName(user.email)
         handleDisplayConversation()
     }
 
@@ -97,11 +137,7 @@ const NavComms = (props) => {
                                 return (
                                     <div className='channels' key={id}
                                         // onClick={() => handleMessageTarget(channel)}
-                                        onDoubleClick={() => {
-                                            handleMessageTarget(channel)
-                                            // handleMessageAreaName(name)
-                                            // handleDisplayConversation()
-                                        }}
+                                        onDoubleClick={() => handleMessageTarget(channel)}
                                         >
                                         <p>{name}</p>
                                     </div>
@@ -128,9 +164,22 @@ const NavComms = (props) => {
                         {directMessageUsers && directMessageUsers.map((user) => {
                             const{id, email} = user;
                                 return (
-                                    <div className="user" key={id}><p>{email}</p><p>{id}</p></div>
+                                    <div 
+                                        className="user" 
+                                        key={id}
+                                        onDoubleClick={() => handleMessageTargetDM(user)}
+                                        >
+                                            <p>{email}</p>
+                                            <p>{id}</p>
+                                    </div>
                                 )
                         })}
+                        {/* {usersDM && usersDM.map((user) => {
+                            const{id, email} = user;
+                                return (
+                                    <div className="user" key={id}><p>{email}</p><p>{id}</p></div>
+                                )
+                        })} */}
                     </div>
                 </div>
             </div>
