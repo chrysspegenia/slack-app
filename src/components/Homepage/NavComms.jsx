@@ -4,6 +4,17 @@ import axios from "axios";
 
 const NavComms = (props) => {
     const {channels, setChannels, user, API_URL, setMessageTarget, setMessageAreaName, handleDisplayConversation, directMessageUsers, setDirectMessageUsers} = props
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [newChannelName, setNewChannelName] = useState("");
+    const [newChannelMembers, setNewChannelMembers] = useState("");
+
+    const openModal = () => {
+        setIsModalOpen(true);
+      };
+    
+      const closeModal = () => {
+        setIsModalOpen(false);
+      };
 
     useEffect(() => {
         if (user) {
@@ -61,6 +72,49 @@ const NavComms = (props) => {
         }
     }
 
+    const createNewChannel = async () => {
+        try {
+          const response = await axios.post(`${API_URL}/channels`, {
+            name: newChannelName,                                               //interpret in base 10
+            user_ids: newChannelMembers.split(',').map(id => parseInt(id.trim(), 10)), //cleanup and convert string to interger
+          }, {                                                                         // if "1,2,3" convert to "[1, 2, 3]"
+            headers: {
+              "access-token": user.accessToken,
+              client: user.client,
+              expiry: user.expiry,
+              uid: user.uid,
+            },
+          });
+
+    const { data,status } = response;
+    console.log("Server response:", data);
+    console.log("Server response:", response); // for debugging
+
+        if (status === 200 && data.data && data.data.id) {
+           alert("Channel creation successful");
+           console.log("Channel creation successful");
+           setNewChannelName("");
+           setNewChannelMembers("");
+            closeModal(); 
+        } else {
+            alert("Failed to create the channel");
+            console.log("Failed to create the channel, data:", data); //for debugging
+            console.log("Failed to create the channel, status:", status); 
+            closeModal();
+            setNewChannelName("");
+            setNewChannelMembers("");
+        }
+        } catch (error) {
+        console.error("Error creating the channel", error); //for debugging
+        alert("Failed to create the channel");
+        closeModal();
+        setNewChannelName("");
+        setNewChannelMembers("");
+        }
+    };
+    
+ 
+    
     // const {usersDM, setUsersDM} = useState([]) 
 
     // // //function to loop over all accounts id's to retrieve accounts that has sent message to user
@@ -147,10 +201,35 @@ const NavComms = (props) => {
                             {/* if account has no channels this will display */}
                             { !channels && <div className='channels'>No channels yet</div> }
 
-                        <div className='add-channels'>
+                            <div className='add-channels'>
                             <i className="comms-logo fa-solid fa-plus"></i>
-                            Add channels
-                        </div>
+                            <button className= "add-channels-button" onClick={openModal}>                       
+                                Add channels
+                            </button>  
+
+                            {isModalOpen && (
+                            <div className="add-channels-modal">
+                                <div className="add-channels-modal-content">
+                                    <h2>Create a new channel</h2>
+                                    <input
+                                        type="text"
+                                        placeholder="Channel name"
+                                        value={newChannelName}
+                                        onChange={(e) => setNewChannelName(e.target.value)}
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="Member ID ie. 4001,4002"
+                                        value={newChannelMembers}
+                                        onChange={(e) => setNewChannelMembers(e.target.value)}
+                                    />
+                                    <div className='create-channel-button'>
+                                        <button onClick={closeModal}>Cancel</button>
+                                        <button onClick={createNewChannel}>Create</button>
+                                    </div>
+                                </div>
+                            </div>
+                            )}  
                     </div>
                 </div>
 
@@ -183,7 +262,7 @@ const NavComms = (props) => {
                     </div>
                 </div>
             </div>
-            
+            </div>
         </div>
     );
 };
