@@ -3,7 +3,7 @@ import './NavComms.css'
 import axios from "axios";
 
 const NavComms = (props) => {
-    const {channels, setChannels, user, API_URL, setMessageTarget, setMessageAreaName, handleDisplayConversation, directMessageUsers, setDirectMessageUsers} = props
+    const {channels, setChannels, user, API_URL, setMessageTarget, setMessageAreaName, handleDisplayConversation, directMessageUsers, setDirectMessageUsers, setShowSearchUserInput} = props
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newChannelName, setNewChannelName] = useState("");
     const [newChannelMembers, setNewChannelMembers] = useState("");
@@ -146,22 +146,24 @@ const NavComms = (props) => {
     // getExistingUsersDM()
 
     //function updates message target info, rerenders the conversationDisplay 
-    function handleMessageTarget(channel){
+    function handleMessageTargetChannel(channel){
+        setShowSearchUserInput(false)
         setMessageTarget({
             'receiver_id': channel.id,
             'receiver_class':'Channel',
         })
         setMessageAreaName(channel.name)
-        handleDisplayConversation()
+        // handleDisplayConversation() removed for causing render flickering
     }
 
     function handleMessageTargetDM(user){
+        setShowSearchUserInput(false)
         setMessageTarget({
             'receiver_id': user.id,
             'receiver_class':'User',
         })
         setMessageAreaName(user.email)
-        handleDisplayConversation()
+        // handleDisplayConversation() removed for causing render flickering
     }
 
     return (
@@ -191,7 +193,7 @@ const NavComms = (props) => {
                                 return (
                                     <div className='channels' key={id}
                                         // onClick={() => handleMessageTarget(channel)}
-                                        onDoubleClick={() => handleMessageTarget(channel)}
+                                        onDoubleClick={() => handleMessageTargetChannel(channel)}
                                         >
                                         <p>{name}</p>
                                     </div>
@@ -237,7 +239,12 @@ const NavComms = (props) => {
                     <div className='comms-header'>
                         <i className="comms-header-logo fa-solid fa-caret-down"></i>
                         <span className='comms-title'>Direct message</span>
-                        <i className="direct-msg-icon fa-solid fa-plus"></i>
+                        <i className="direct-msg-icon fa-solid fa-plus"
+                            onClick={() => { 
+                                setMessageAreaName("New message")
+                                setShowSearchUserInput(true)
+                            }}
+                        ></i>
                     </div>
                     <div className='users-container'>
                         {directMessageUsers && directMessageUsers.map((user) => {
