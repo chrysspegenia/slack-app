@@ -14,12 +14,14 @@ const Workspace = (props) => {
     const [messageTarget, setMessageTarget] = useState({'receiver_id':"", 
                                                         'receiver_class':''})
     const{ receiver_id, receiver_class} = messageTarget
-    const[displayConversation, setDisplayConversation] = useState([])
+    const[displayConversation, setDisplayConversation] = useState([]);
+    const [showSearchUserInput, setShowSearchUserInput] = useState(false);
+    const [showConversationArea, setShowConversationArea] = useState(false);
 
     //Need proper dependency to display conversation properly
     useEffect(() => {
         handleDisplayConversation()
-    }, [receiver_id])
+    }, [receiver_id, sendMessage])
 
     async function handleDisplayConversation(){
         try {
@@ -59,6 +61,7 @@ const Workspace = (props) => {
                 messageTarget={messageTarget}
                 handleDisplayConversation={handleDisplayConversation}
                 displayConversation={displayConversation}
+                showSearchUserInput={showSearchUserInput}
             ></MessageArea>
             <NavComms 
                 setMessageTarget={setMessageTarget}
@@ -70,6 +73,7 @@ const Workspace = (props) => {
                 user={user}
                 API_URL={API_URL}
                 handleDisplayConversation={handleDisplayConversation}
+                setShowSearchUserInput={setShowSearchUserInput}
             ></NavComms>
         </div>
     );
