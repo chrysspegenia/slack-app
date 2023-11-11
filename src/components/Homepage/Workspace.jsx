@@ -18,10 +18,11 @@ const Workspace = (props) => {
     const [showSearchUserInput, setShowSearchUserInput] = useState(false);
     const [showConversationArea, setShowConversationArea] = useState(false);
 
-    //Need proper dependency to display conversation properly
     useEffect(() => {
         handleDisplayConversation()
     }, [receiver_id, sendMessage])
+    //receiver_id changes when clicking a new channel or DM target
+    //sendMessage changes when sending a message
 
     async function handleDisplayConversation(){
         try {
@@ -53,15 +54,17 @@ const Workspace = (props) => {
                 user={user}
                 API_URL={API_URL}
                 handleDisplayConversation={handleDisplayConversation}
+                showConversationArea={showConversationArea}
             ></Textbox>
             <MessageArea
                 user={user}
                 API_URL={API_URL}
                 messageAreaName={messageAreaName}
                 messageTarget={messageTarget}
-                handleDisplayConversation={handleDisplayConversation}
                 displayConversation={displayConversation}
                 showSearchUserInput={showSearchUserInput}
+                showConversationArea={showConversationArea}
+                directMessageUsers={directMessageUsers}
             ></MessageArea>
             <NavComms 
                 setMessageTarget={setMessageTarget}
@@ -72,8 +75,8 @@ const Workspace = (props) => {
                 setMessageAreaName={setMessageAreaName}
                 user={user}
                 API_URL={API_URL}
-                handleDisplayConversation={handleDisplayConversation}
                 setShowSearchUserInput={setShowSearchUserInput}
+                setShowConversationArea={setShowConversationArea}
             ></NavComms>
         </div>
     );

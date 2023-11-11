@@ -1,10 +1,10 @@
 import {useState, useEffect} from 'react';
 import './MessageArea.css'
-// import axios from "axios";
+import SearchUserInput from './SearchUserInput';
 
 const MessageArea = (props) => {
 
-    const {user, API_URL, messageTarget, messageAreaName, handleDisplayConversation, displayConversation} = props
+    const {user, API_URL, messageTarget, messageAreaName, handleDisplayConversation, displayConversation, showSearchUserInput, showConversationArea, directMessageUsers} = props
     // const{ receiver_id, receiver_class} = messageTarget
     // const[displayConversation, setDisplayConversation] = useState([])
 
@@ -41,7 +41,12 @@ const MessageArea = (props) => {
                 <span className='messages-header'>{messageAreaName} <i className="arrow-down fa-solid fa-angle-down"></i></span>
             </div>
 
-            <div className='messages-content'>
+            {showSearchUserInput && 
+            <SearchUserInput 
+                directMessageUsers={directMessageUsers}
+            />}
+
+            {showConversationArea && <div className='messages-content'>
                 {/* where messages would be rendered */}
                 {displayConversation && displayConversation.map((message) => {
 
@@ -60,7 +65,7 @@ const MessageArea = (props) => {
                     
                 }
                 {!displayConversation && <div className='message'>No Messages</div>}
-            </div>
+            </div>}
         </div>
     );
 };

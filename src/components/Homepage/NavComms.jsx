@@ -3,7 +3,7 @@ import './NavComms.css'
 import axios from "axios";
 
 const NavComms = (props) => {
-    const {channels, setChannels, user, API_URL, setMessageTarget, setMessageAreaName, handleDisplayConversation, directMessageUsers, setDirectMessageUsers, setShowSearchUserInput} = props
+    const {channels, setChannels, user, API_URL, setMessageTarget, setMessageAreaName, directMessageUsers, setDirectMessageUsers, setShowSearchUserInput, setShowConversationArea} = props
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newChannelName, setNewChannelName] = useState("");
     const [newChannelMembers, setNewChannelMembers] = useState("");
@@ -153,7 +153,7 @@ const NavComms = (props) => {
             'receiver_class':'Channel',
         })
         setMessageAreaName(channel.name)
-        // handleDisplayConversation() removed for causing render flickering
+        setShowConversationArea(true)
     }
 
     function handleMessageTargetDM(user){
@@ -163,7 +163,7 @@ const NavComms = (props) => {
             'receiver_class':'User',
         })
         setMessageAreaName(user.email)
-        // handleDisplayConversation() removed for causing render flickering
+        setShowConversationArea(true)
     }
 
     return (
@@ -193,7 +193,7 @@ const NavComms = (props) => {
                                 return (
                                     <div className='channels' key={id}
                                         // onClick={() => handleMessageTarget(channel)}
-                                        onDoubleClick={() => handleMessageTargetChannel(channel)}
+                                        onClick={() => handleMessageTargetChannel(channel)}
                                         >
                                         <p>{name}</p>
                                     </div>
@@ -243,6 +243,7 @@ const NavComms = (props) => {
                             onClick={() => { 
                                 setMessageAreaName("New message")
                                 setShowSearchUserInput(true)
+                                setShowConversationArea(false)
                             }}
                         ></i>
                     </div>
@@ -253,19 +254,13 @@ const NavComms = (props) => {
                                     <div 
                                         className="user" 
                                         key={id}
-                                        onDoubleClick={() => handleMessageTargetDM(user)}
+                                        onClick={() => handleMessageTargetDM(user)}
                                         >
                                             <p>{email}</p>
                                             <p>{id}</p>
                                     </div>
                                 )
                         })}
-                        {/* {usersDM && usersDM.map((user) => {
-                            const{id, email} = user;
-                                return (
-                                    <div className="user" key={id}><p>{email}</p><p>{id}</p></div>
-                                )
-                        })} */}
                     </div>
                 </div>
             </div>

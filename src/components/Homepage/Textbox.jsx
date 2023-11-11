@@ -3,7 +3,7 @@ import './Textbox.css';
 
 const Textbox = (props) => {
 
-    const {sendMessage, setSendMessage, user, API_URL, messageTarget} = props
+    const {sendMessage, setSendMessage, user, API_URL, messageTarget, showConversationArea} = props
 
     async function handleSendMessage(){
         
@@ -82,8 +82,7 @@ const Textbox = (props) => {
                         <div className='textbtn send-btn'
                             type="submit"
                             onClick={() => {
-                                handleSendMessage()
-                                // handleDisplayConversation() removed for causing render flickering
+                                if(showConversationArea) return handleSendMessage()
                             }}
                         >
                             <i className="fa-solid fa-paper-plane"></i>
