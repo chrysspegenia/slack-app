@@ -4,7 +4,7 @@ import SearchUserInput from './SearchUserInput';
 
 const MessageArea = (props) => {
 
-    const {user, API_URL, messageTarget, messageAreaName, handleDisplayConversation, displayConversation, showSearchUserInput, showConversationArea, directMessageUsers} = props
+    const {user, API_URL, messageTarget, messageAreaName, handleDisplayConversation, displayConversation, showSearchUserInput, showConversationArea, directMessageUsers, handleMessageTargetDM} = props
     // const{ receiver_id, receiver_class} = messageTarget
     // const[displayConversation, setDisplayConversation] = useState([])
 
@@ -44,6 +44,7 @@ const MessageArea = (props) => {
             {showSearchUserInput && 
             <SearchUserInput 
                 directMessageUsers={directMessageUsers}
+                handleMessageTargetDM={handleMessageTargetDM}
             />}
 
             {showConversationArea && <div className='messages-content'>

@@ -45,6 +45,16 @@ const Workspace = (props) => {
         }
     }
 
+    function handleMessageTargetDM(user){
+        setShowSearchUserInput(false)
+        setMessageTarget({
+            'receiver_id': user.id,
+            'receiver_class':'User',
+        })
+        setMessageAreaName(user.email)
+        setShowConversationArea(true)
+    }
+
     return (
         <div className='workspace-section'>
             <Textbox
@@ -65,6 +75,7 @@ const Workspace = (props) => {
                 showSearchUserInput={showSearchUserInput}
                 showConversationArea={showConversationArea}
                 directMessageUsers={directMessageUsers}
+                handleMessageTargetDM={handleMessageTargetDM}
             ></MessageArea>
             <NavComms 
                 setMessageTarget={setMessageTarget}
@@ -77,6 +88,7 @@ const Workspace = (props) => {
                 API_URL={API_URL}
                 setShowSearchUserInput={setShowSearchUserInput}
                 setShowConversationArea={setShowConversationArea}
+                handleMessageTargetDM={handleMessageTargetDM}
             ></NavComms>
         </div>
     );

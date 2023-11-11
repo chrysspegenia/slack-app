@@ -3,7 +3,7 @@ import './SearchUserInput.css'
 
 const SearchUserInput = (props) => {
 
-    const {directMessageUsers} = props
+    const {directMessageUsers, handleMessageTargetDM} = props
     
     const [displayAccount, setDisplayAccount] = useState("");
 
@@ -48,7 +48,10 @@ const SearchUserInput = (props) => {
                     {
                         matchAccounts.map((existingAccount) => {
 
-                            return <div className="existing-account" key={existingAccount.id}>
+                            return <div className="existing-account" 
+                                        key={existingAccount.id}
+                                        onMouseDown={() => handleMessageTargetDM(existingAccount)}
+                                        >
                                         <i className="user-icon fa-regular fa-user"></i>
                                         <div className="existing-account-number">{existingAccount.id}</div>
                                         <div className="existing-account-name">{existingAccount.uid}</div>
