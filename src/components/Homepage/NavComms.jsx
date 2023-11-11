@@ -3,7 +3,7 @@ import './NavComms.css'
 import axios from "axios";
 
 const NavComms = (props) => {
-    const {channels, setChannels, user, API_URL, setMessageTarget, setMessageAreaName, directMessageUsers, setDirectMessageUsers, setShowSearchUserInput, setShowConversationArea} = props
+    const {channels, setChannels, user, API_URL, setMessageTarget, setMessageAreaName, directMessageUsers, setDirectMessageUsers, setShowSearchUserInput, setShowConversationArea, handleMessageTargetDM} = props
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newChannelName, setNewChannelName] = useState("");
     const [newChannelMembers, setNewChannelMembers] = useState("");
@@ -153,16 +153,6 @@ const NavComms = (props) => {
             'receiver_class':'Channel',
         })
         setMessageAreaName(channel.name)
-        setShowConversationArea(true)
-    }
-
-    function handleMessageTargetDM(user){
-        setShowSearchUserInput(false)
-        setMessageTarget({
-            'receiver_id': user.id,
-            'receiver_class':'User',
-        })
-        setMessageAreaName(user.email)
         setShowConversationArea(true)
     }
 
