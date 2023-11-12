@@ -137,3 +137,9 @@
 .channel-members-modal-content li{
     list-style: none;
 }
+
+.channel-members-section{
+    background-color: transparent;
+    border-radius: 15px;
+    border: 2px solid white;
+}

@@ -84,7 +84,6 @@ const MessageArea = (props) => {
           // Fetch the updated list of channel members
           await fetchChannelMembers(channelId);
       
-          // Optionally, you can clear the input field after adding the member
           setInputUserId("");
       
           console.log('Member added successfully');
