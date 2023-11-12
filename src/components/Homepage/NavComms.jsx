@@ -202,38 +202,37 @@ const NavComms = (props) => {
                                 })
                             }
                             {/* if account has no channels this will display */}
-                            { !channels && <div className='channels'>No channels yet</div> }
+                            { !channels && <div className='channels'>No channels yet</div> }  
+                    </div>
+                    <div className='add-channels'>
+                        <i className="comms-logo fa-solid fa-plus"></i>
+                        <button className= "add-channels-button" onClick={openModal}>                       
+                            Add channels
+                        </button>  
 
-                            <div className='add-channels'>
-                            <i className="comms-logo fa-solid fa-plus"></i>
-                            <button className= "add-channels-button" onClick={openModal}>                       
-                                Add channels
-                            </button>  
-
-                            {isModalOpen && (
-                            <div className="add-channels-modal">
-                                <div className="add-channels-modal-content">
-                                    <h2>Create a new channel</h2>
-                                    <input
-                                        type="text"
-                                        placeholder="Channel name"
-                                        value={newChannelName}
-                                        onChange={(e) => setNewChannelName(e.target.value)}
-                                    />
-                                    <input
-                                        type="text"
-                                        placeholder="Member ID ie. 4001,4002"
-                                        value={newChannelMembers}
-                                        onChange={(e) => setNewChannelMembers(e.target.value)}
-                                    />
-                                    <div className='create-channel-button'>
-                                        <button onClick={closeModal}>Cancel</button>
-                                        <button onClick={createNewChannel}>Create</button>
-                                    </div>
+                        {isModalOpen && (
+                        <div className="add-channels-modal">
+                            <div className="add-channels-modal-content">
+                                <h2>Create a new channel</h2>
+                                <input
+                                    type="text"
+                                    placeholder="Channel name"
+                                    value={newChannelName}
+                                    onChange={(e) => setNewChannelName(e.target.value)}
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="Member ID ie. 4001,4002"
+                                    value={newChannelMembers}
+                                    onChange={(e) => setNewChannelMembers(e.target.value)}
+                                />
+                                <div className='create-channel-button'>
+                                    <button onClick={closeModal}>Cancel</button>
+                                    <button onClick={createNewChannel}>Create</button>
                                 </div>
                             </div>
-                            )}  
-                    </div>
+                        </div>
+                        )}
                 </div>
 
                 <div className='channel-section'>
