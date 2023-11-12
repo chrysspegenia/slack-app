@@ -23,10 +23,7 @@ const NavComms = (props) => {
     }, [user]);
 
     useEffect(() => {
-        if (user) {
             getUsers();
-            // getExistingUsersDM();
-        }
     }, [user]);
 
     async function getChannels(){
@@ -72,6 +69,52 @@ const NavComms = (props) => {
         }
     }
 
+    const [usersDM, setUsersDM] = useState([]) 
+
+    //need better dependency
+    useEffect( ()=> {
+        getExistingUsersDM()  
+    }, [directMessageUsers])
+
+    // //function to loop over all accounts id's to retrieve accounts that has sent message to user
+    async function getExistingUsersDM() {
+        let uniqueReceiverID = [];
+    
+        try {
+            await Promise.all(
+                directMessageUsers.map(async (account) => {
+                    const response = await axios.get(`${API_URL}/messages?receiver_id=${account.id}&receiver_class=User`, {
+                        headers: {
+                            "access-token": user.accessToken,
+                            client: user.client,
+                            expiry: user.expiry,
+                            uid: user.uid
+                        }
+                    });
+                    
+                    const users = response.data.data;
+                    if (users.length !== 0) {
+                        const receiverInfo = Array.from(new Set(users.flatMap(messageInfo => messageInfo.receiver)));
+                            uniqueReceiverID.push(...receiverInfo);
+                    }
+                })
+            );
+
+            let uniqueReceiversMap = new Map();
+
+            uniqueReceiverID.forEach(obj => {
+                uniqueReceiversMap.set(obj.uid, obj);
+              });
+    
+            let uniqueArrayOfObjects = Array.from(uniqueReceiversMap.values());
+
+            setUsersDM(uniqueArrayOfObjects);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+
     const createNewChannel = async () => {
         try {
           const response = await axios.post(`${API_URL}/channels`, {
@@ -112,38 +155,6 @@ const NavComms = (props) => {
         setNewChannelMembers("");
         }
     };
-    
- 
-    
-    // const {usersDM, setUsersDM} = useState([]) 
-
-    // // //function to loop over all accounts id's to retrieve accounts that has sent message to user
-    // async function getExistingUsersDM(){
-    //     for(const user of directMessageUsers){
-    //     try {
-    //         const response = await axios.get(`${API_URL}/messages?receiver_id=${user.id}&receiver_class=User`, {
-    //             headers: {
-    //                 "access-token": user.accessToken,
-    //                 client: user.client,
-    //                 expiry: user.expiry,
-    //                 uid: user.uid
-    //             }
-    //         });
-    //         const users = response.data.data;
-    //         // if(users.length !== 0){
-    //         //     continue; //skip to the next user if there are no messages
-    //         // }
-    //         //     setUsersDM(users)
-    //         //     console.log(usersDM)
-    //         console.log(users)
-    //     } catch (error) {
-    //         if(error){
-    //             return alert("problem retreiving users with direct dm");
-    //         }
-    //     }
-    //     }
-    // }
-    // getExistingUsersDM()
 
     //function updates message target info, rerenders the conversationDisplay 
     function handleMessageTargetChannel(channel){
@@ -237,7 +248,7 @@ const NavComms = (props) => {
                             }}
                         ></i>
                     </div>
-                    <div className='users-container'>
+                    {/* <div className='users-container'>
                         {directMessageUsers && directMessageUsers.map((user) => {
                             const{id, email} = user;
                                 return (
@@ -245,6 +256,21 @@ const NavComms = (props) => {
                                         className="user" 
                                         key={id}
                                         onClick={() => handleMessageTargetDM(user)}
+                                        >
+                                            <p>{email}</p>
+                                            <p>{id}</p>
+                                    </div>
+                                )
+                        })}
+                    </div> */}
+                    <div className='users-container'>
+                        {usersDM && usersDM.map((receiver) => {
+                            const{id, email} = receiver;
+                                return (
+                                    <div 
+                                        className="user" 
+                                        key={id}
+                                        onClick={() => handleMessageTargetDM(receiver)}
                                         >
                                             <p>{email}</p>
                                             <p>{id}</p>
