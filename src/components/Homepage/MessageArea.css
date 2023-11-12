@@ -98,3 +98,42 @@
     grid-area: 1 / 1 / 3 / 2;
     place-self: start;
 }
+
+.channel-members-modal{
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: 5%;
+    left: 75%;
+    padding: 15px;
+    border-radius: 15px;
+    background-color:#23282d;
+    z-index: 10000;
+}
+
+.channel-members-modal-headers{
+    display: flex;
+    justify-content: space-between;
+}
+
+.channel-members-modal-headers h2{
+    width: 100%;
+    margin: 0;
+    padding-left: 50px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+.members-close-button{
+    background-color: transparent;
+    padding-bottom: 20px;
+    border-style: none;
+    cursor: pointer;
+    color: white;
+    font-weight: 800;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+.channel-members-modal-content li{
+    list-style: none;
+}
