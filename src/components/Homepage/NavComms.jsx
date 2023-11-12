@@ -156,6 +156,34 @@ const NavComms = (props) => {
         }
     };
 
+    const fetchChannelMembers = async (channelId) => {
+        try {
+          if (!channelId) {
+            console.error('Channel ID is not defined.');
+            return;
+          }
+    
+          const response = await axios.get(`${API_URL}/channels/${channelId}`, {
+            headers: {
+              'access-token': user.accessToken,
+              client: user.client,
+              expiry: user.expiry,
+              uid: user.uid,
+            },
+          });
+    
+          const { data } = response;
+    
+          if (data && data.data && data.data.channel_members) {
+            const members = data.data.channel_members;
+          } else {
+            console.error('Invalid response structure. Please check the API response.');
+          }
+        } catch (error) {
+          console.error('Error fetching channel members', error);
+        }
+      };
+
     //function updates message target info, rerenders the conversationDisplay 
     function handleMessageTargetChannel(channel){
         setShowSearchUserInput(false)
@@ -165,6 +193,7 @@ const NavComms = (props) => {
         })
         setMessageAreaName(channel.name)
         setShowConversationArea(true)
+        fetchChannelMembers(channel.id);
     }
 
     return (
