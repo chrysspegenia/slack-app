@@ -46,6 +46,14 @@ const Textbox = (props) => {
         setTimeout(() => clearInterval(delayedScroll), 1000)
     }
 
+    function submitEventFunctions(){
+        if(showConversationArea){
+            handleSendMessage()
+            setShouldUpdateDMList(true)
+            timeScrollBottom()
+        }
+    }
+
     return (
         <div className="textbox-section">
             <div className="textbox-container">
@@ -89,11 +97,7 @@ const Textbox = (props) => {
                     <div className='confirm-btns'>
                         <div className='textbtn send-btn'
                             type="submit"
-                            onClick={() => showConversationArea 
-                                            && handleSendMessage()
-                                            && timeScrollBottom()
-                                            && setShouldUpdateDMList(true)
-                                        }
+                            onClick={submitEventFunctions}
                         >
                             <i className="fa-solid fa-paper-plane"></i>
                         </div>
