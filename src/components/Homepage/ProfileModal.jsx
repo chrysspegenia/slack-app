@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ProfileModal.css'
 
 const ProfileModal = (props) => {
 
-    const {setIsLoggedIn, user} = props
+    const {setIsLoggedIn, user, showProfileModal} = props
     
     function logout(){
         localStorage.clear();
@@ -11,17 +11,17 @@ const ProfileModal = (props) => {
     }
 
     return (
-        <div className='profile-modal'>
+        showProfileModal && <div className='profile-modal'>
             <div className='profile-info-section'>
                 <i className="user-icon fa-regular fa-user"></i>
                 <p className='profile-info profile-email'>{user.uid}</p>
                 <p className='profile-info profile-id'>{user.id}</p>
             </div>
 
-            <p className='profile-btns'>Set yourself as active</p>
-            <p className='profile-btns'>Pause notification</p>
-            <p className='profile-btns'>Profile</p>
-            <p className='profile-btns'>Preferences</p>
+            <div className='profile-btns'>Set yourself as active</div>
+            <div className='profile-btns'>Pause notification</div>
+            <div className='profile-btns'>Profile</div>
+            <div className='profile-btns'>Preferences</div>
             <button className="logout-btn" onClick={logout}>Sign out of Slack</button>
         </div>
     );

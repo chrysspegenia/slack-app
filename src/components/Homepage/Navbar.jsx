@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import './Navbar.css'
 import workspaceLogo from '../../assets/images/slack-logo.png'
 import ProfileModal from './ProfileModal';
@@ -6,6 +7,8 @@ import ProfileModal from './ProfileModal';
 const Navbar = (props) => {
 
     const {setIsLoggedIn, user} = props
+
+    const [showProfileModal, setShowProfileModal] = useState(false);
 
     return (
         <div className='navbar-section'>
@@ -34,9 +37,9 @@ const Navbar = (props) => {
                 </div>
             </div>
 
-            <ProfileModal setIsLoggedIn={setIsLoggedIn} user={user}></ProfileModal>
+            <ProfileModal setIsLoggedIn={setIsLoggedIn} user={user} setShowProfileModal={setShowProfileModal} showProfileModal={showProfileModal}></ProfileModal>
 
-            <div className='user-profile-section'>
+            <div className='user-profile-section' onClick={() => showProfileModal? setShowProfileModal(false) : setShowProfileModal(true)}>
                 <i className="create-new-icon fa-solid fa-plus"></i>
                 <i className="user-icon fa-regular fa-user"></i>
             </div>

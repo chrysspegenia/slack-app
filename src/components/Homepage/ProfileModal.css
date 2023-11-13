@@ -9,7 +9,7 @@
     color:antiquewhite;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     border-radius: 12px;
     font-size:17px;
 }
@@ -20,8 +20,8 @@
     display:grid;
     grid-template: repeat(2,22px) / 40px 1fr;
     align-items:center;
-    /* border:2px solid red; */
     box-sizing: border-box;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.45);
 }
 
 .profile-modal .user-icon{
@@ -48,6 +48,7 @@
 .profile-btns{
     /* text-align: left; */
     padding: 10px 40px;
+    font-size: 15px;;
 }
 
 .profile-info-section:hover,
@@ -57,10 +58,16 @@
 }
 .logout-btn{
     background:none;
-    padding: 5px 24px;
+    padding: 10px 24px;
     border:none;
     width:100%;
     color:antiquewhite;
     font-size:17px;
-    /* border-top: 1px solid rgba(255, 255, 255, 0.45); */
+    border-top: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+.profile-info-section,
+.profile-btns,
+.logout-btn{
+    cursor:pointer;
 }
