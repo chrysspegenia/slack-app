@@ -137,6 +137,9 @@ const NavComms = (props) => {
         if (status === 200 && data.data && data.data.id) {
            alert("Channel creation successful");
            console.log("Channel creation successful");
+
+           setChannels((prevChannels) => [...prevChannels, data.data]);
+
            setNewChannelName("");
            setNewChannelMembers("");
             closeModal(); 
