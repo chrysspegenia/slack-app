@@ -1,13 +1,66 @@
 .profile-modal{
     position:absolute;
-    border:2px solid red;
-    padding:10px;
-    left:5%;
-    background-color: black;
+    left:4%;
+    bottom:4%;
+    width:300px;
+    padding:12px 0;
+    background-color:#23282d;
     z-index:2;
+    color:antiquewhite;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: 12px;
+    font-size:17px;
+}
+
+.profile-info-section{
+    width:100%;
+    padding: 8px 20px 12px 24px;
+    display:grid;
+    grid-template: repeat(2,22px) / 40px 1fr;
+    align-items:center;
+    /* border:2px solid red; */
+    box-sizing: border-box;
 }
 
 .profile-modal .user-icon{
     width:36px;
     height:36px;
+    grid-area: 1 / 1 / 3 / 2;
+}
+
+.profile-email{
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+.profile-id{
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+.profile-info{
+    padding: 0 12px;
+    font-weight:500;
+    line-height:1.3;
+    height:22px;
+}
+
+.profile-btns{
+    /* text-align: left; */
+    padding: 10px 40px;
+}
+
+.profile-info-section:hover,
+.profile-btns:hover,
+.logout-btn:hover{
+    background:rgba(2, 175, 255, 0.452);
+}
+.logout-btn{
+    background:none;
+    padding: 5px 24px;
+    border:none;
+    width:100%;
+    color:antiquewhite;
+    font-size:17px;
+    /* border-top: 1px solid rgba(255, 255, 255, 0.45); */
 }
