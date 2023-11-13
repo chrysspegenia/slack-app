@@ -171,28 +171,38 @@ const NavComms = (props) => {
           });
 
     const { data,status } = response;
-    console.log("Server response:", data);
-    console.log("Server response:", response); // for debugging
+    // console.log("Server response:", data);
+    // console.log("Server response:", response); // for debugging
 
         if (status === 200 && data.data && data.data.id) {
            alert("Channel creation successful");
-           console.log("Channel creation successful");
+        //    console.log("Channel creation successful");
 
-           setChannels((prevChannels) => [...prevChannels, data.data]);
+           setChannels((prevChannels) => {
+            const newChannels = data.data;
+          //check if prevChannels is an array
+            if (Array.isArray(prevChannels)) {
+              return [...prevChannels, newChannels]; //if true add new channels
+            } else {
+
+              // if not an array return a new array with new channels
+              return [newChannels];
+            }
+          });
 
            setNewChannelName("");
            setNewChannelMembers("");
             closeModal(); 
         } else {
             alert("Failed to create the channel");
-            console.log("Failed to create the channel, data:", data); //for debugging
-            console.log("Failed to create the channel, status:", status); 
+            // console.log("Failed to create the channel, data:", data); //for debugging
+            // console.log("Failed to create the channel, status:", status); 
             closeModal();
             setNewChannelName("");
             setNewChannelMembers("");
         }
         } catch (error) {
-        console.error("Error creating the channel", error); //for debugging
+        // console.error("Error creating the channel", error); //for debugging
         alert("Failed to create the channel");
         closeModal();
         setNewChannelName("");
