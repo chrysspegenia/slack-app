@@ -3,7 +3,7 @@ import './Textbox.css';
 
 const Textbox = (props) => {
 
-    const {sendMessage, setSendMessage, user, API_URL, messageTarget, showConversationArea} = props
+    const {sendMessage, setSendMessage, user, API_URL, messageTarget, showConversationArea, setShouldScrollToBottom} = props
 
     async function handleSendMessage(){
         
@@ -36,6 +36,14 @@ const Textbox = (props) => {
         } catch (error){
             alert(error)
         }
+    }
+
+    function timeScrollBottom(){
+        const delayedScroll = setInterval(() =>{
+                setShouldScrollToBottom(true)
+            },100);
+
+        setTimeout(() => clearInterval(delayedScroll), 500)
     }
 
     return (
@@ -81,9 +89,10 @@ const Textbox = (props) => {
                     <div className='confirm-btns'>
                         <div className='textbtn send-btn'
                             type="submit"
-                            onClick={() => {
-                                if(showConversationArea) return handleSendMessage()
-                            }}
+                            onClick={() => showConversationArea 
+                                            && handleSendMessage()
+                                            && timeScrollBottom()
+                                        }
                         >
                             <i className="fa-solid fa-paper-plane"></i>
                         </div>

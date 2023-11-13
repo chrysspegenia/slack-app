@@ -1,11 +1,11 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import './MessageArea.css'
 import SearchUserInput from './SearchUserInput';
 import axios from "axios";
 
 const MessageArea = (props) => {
 
-    const {user, API_URL, messageTarget, messageAreaName, handleDisplayConversation, displayConversation, showSearchUserInput, showConversationArea, directMessageUsers, handleMessageTargetDM} = props
+    const {user, API_URL, messageTarget, messageAreaName, handleDisplayConversation, displayConversation, showSearchUserInput, showConversationArea, directMessageUsers, handleMessageTargetDM, messageContent} = props
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [channelMembers, setChannelMembers] = useState([]);
     const [channelId, setChannelId] = useState();
@@ -92,36 +92,7 @@ const MessageArea = (props) => {
         }
       };
       
-    // const{ receiver_id, receiver_class} = messageTarget
-    // const[displayConversation, setDisplayConversation] = useState([])
-
-    // useEffect(() => {
-    //     if (user) {
-    //         handleDisplayConversation();
-    //     }
-    // }, [user]);
-
-    // async function handleDisplayConversation(){
-    //     try {
-    //         const response = await axios.get(`${API_URL}/messages?receiver_id=${receiver_id}&receiver_class=${receiver_class}`, {
-    //             headers: {
-    //                 "access-token": user.accessToken,
-    //                 client: user.client,
-    //                 expiry: user.expiry,
-    //                 uid: user.uid
-    //             }
-    //         });
-    //         const { data } = response;
-    //         if(data){
-    //             setDisplayConversation(data.data);
-    //         }
-    //     } catch (error) {
-    //         if(error){
-    //             return alert(error);
-    //         }
-    //     }
-    // }
-
+      
     return (
         <div className='messages-section'>
             <div className='messages-header-section'>
@@ -161,7 +132,11 @@ const MessageArea = (props) => {
                 handleMessageTargetDM={handleMessageTargetDM}
             />}
 
-            {showConversationArea && <div className='messages-content'>
+            {showConversationArea && 
+              <div className='messages-content'
+                    ref={messageContent}
+              >
+
                 {/* where messages would be rendered */}
                 {displayConversation && displayConversation.map((message) => {
 

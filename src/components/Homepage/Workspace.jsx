@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useRef} from 'react';
 import './Workspace.css'
 import Textbox from './Textbox';
 import NavComms from './NavComms';
@@ -18,11 +18,29 @@ const Workspace = (props) => {
     const [showSearchUserInput, setShowSearchUserInput] = useState(false);
     const [showConversationArea, setShowConversationArea] = useState(false);
 
+    const [shouldScrollToBottom, setShouldScrollToBottom] = useState(false);
+
+    const messageContent = useRef(null);
+
+    useEffect(() => {
+        if(shouldScrollToBottom){
+            scrollToBottom()
+            setShouldScrollToBottom(false)
+          }
+    }, [shouldScrollToBottom])
+    
     useEffect(() => {
         handleDisplayConversation()
     }, [receiver_id, sendMessage])
     //receiver_id changes when clicking a new channel or DM target
     //sendMessage changes when sending a message
+
+    const scrollToBottom = () => {
+        if (messageContent.current) {
+            //sets the scroll position of the chat container to its total height, effectively scrolling it to the bottom and revealing the latest messages
+            messageContent.current.scrollTop = messageContent.current.scrollHeight;
+        }
+      };
 
     async function handleDisplayConversation(){
         try {
@@ -65,6 +83,7 @@ const Workspace = (props) => {
                 API_URL={API_URL}
                 handleDisplayConversation={handleDisplayConversation}
                 showConversationArea={showConversationArea}
+                setShouldScrollToBottom={setShouldScrollToBottom}
             ></Textbox>
             <MessageArea
                 user={user}
@@ -76,6 +95,7 @@ const Workspace = (props) => {
                 showConversationArea={showConversationArea}
                 directMessageUsers={directMessageUsers}
                 handleMessageTargetDM={handleMessageTargetDM}
+                messageContent={messageContent}
             ></MessageArea>
             <NavComms 
                 setMessageTarget={setMessageTarget}
