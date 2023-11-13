@@ -1,0 +1,13 @@
+.profile-modal{
+    position:absolute;
+    border:2px solid red;
+    padding:10px;
+    left:5%;
+    background-color: black;
+    z-index:2;
+}
+
+.profile-modal .user-icon{
+    width:36px;
+    height:36px;
+}
