@@ -31,7 +31,7 @@
 }
 
 .signup{
-    height: 150px;
+    height: 200px;
     width: 200px;
     justify-content: center;
     text-align: center;
@@ -50,4 +50,14 @@ h1 {
     font-size: 200px;
     font-weight: 400;
     margin: 0;
+}
+
+.login h2{
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.signup h2{
+    margin: 0;
+    padding-bottom: 10px;
 }

@@ -7,9 +7,13 @@ import axios from 'axios';
 function Login(props){
     const { user, setUser } = props;
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
-    const [passwordConfirmation, setPasswordConfirmation] = useState();
+
+    const [loginEmail, setLoginEmail] = useState("");
+    const [loginPassword, setLoginPassword] = useState("");
+
+    const [regEmail, setRegEmail] = useState("");
+    const [regPassword, setRegPassword] = useState("");
+    const [regPasswordConfirmation, setRegPasswordConfirmation] = useState("");
 
 
     useEffect(() => {
@@ -20,72 +24,72 @@ function Login(props){
     }, [user]);
 
     async function handleSubmit(event){
-        event.preventDefault();
+      event.preventDefault();
 
-        if(!email || !password){
-            return alert("Invalid credentials");
-        }
-        try {
-            const loginCredentials = {
-                email,
-                password
-            }
-            const response = await axios.post(`${API_URL}/auth/sign_in`, loginCredentials);
-            const { data, headers } = response;
-            if(data && headers){
-                const accessToken = headers["access-token"];
-                const expiry = headers["expiry"];
-                const client = headers["client"];
-                const uid = headers["uid"];
+      if(!loginEmail || !loginPassword){
+          return alert("Invalid credentials");
+      }
 
-                setUser({
-                    accessToken,
-                    expiry,
-                    client,
-                    uid,
-                    id: data.data.id
-                })
+      try {
+          const loginCredentials = {
+              email: loginEmail,
+              password: loginPassword
+          }
+          const response = await axios.post(`${API_URL}/auth/sign_in`, loginCredentials);
+          const { data, headers } = response;
+          if(data && headers){
+              const accessToken = headers["access-token"];
+              const expiry = headers["expiry"];
+              const client = headers["client"];
+              const uid = headers["uid"];
 
-                setIsLoggedIn(true);
-            }
-        } catch (error){
-            if(error.response.data.errors) {
-                return alert("Invalid credentials");
-            }
-        }
-    }
+              setUser({
+                  accessToken,
+                  expiry,
+                  client,
+                  uid,
+                  id: data.data.id
+              })
+
+              setIsLoggedIn(true);
+          }
+      } catch (error){
+          if(error.response.data.errors) {
+              return alert("Invalid credentials");
+          }
+      }
+  }
 
   async function handleRegistrationSubmit(event) {
     event.preventDefault();
 
-    if (!email || !password || !passwordConfirmation) {
-      return alert("Please fill in all required fields.");
+    if (!regEmail || !regPassword || !regPasswordConfirmation) {
+        return alert("Please fill in all required fields.");
     }
 
-    if (password !== passwordConfirmation) {
-      return alert("Password and password confirmation do not match.");
+    if (regPassword !== regPasswordConfirmation) {
+        return alert("Password and password confirmation do not match.");
     }
 
     try {
-      const registrationCredentials = {
-        email,
-        password,
-        password_confirmation: passwordConfirmation,
-      };
-      const response = await axios.post(`${API_URL}/auth/`, registrationCredentials);
+        const registrationCredentials = {
+            email: regEmail,
+            password: regPassword,
+            password_confirmation: regPasswordConfirmation,
+        };
+        const response = await axios.post(`${API_URL}/auth/`, registrationCredentials);
 
-      
-      console.log("Registration successful!", response.data);
+        console.log("Registration successful!", response.data);
 
-      setEmail("");
-      setPassword("");
-      setPasswordConfirmation("");
+        setRegEmail("");
+        setRegPassword("");
+        setRegPasswordConfirmation("");
     } catch (error) {
-      if (error.response.data.errors) {
-        alert("Registration failed. Please check your input.");
-      }
+        if (error.response.data.errors) {
+            alert("Registration failed. Please check your input.");
+        }
     }
-  }
+}
 
     return (
         <div className="login-page-main-container">
@@ -96,35 +100,42 @@ function Login(props){
                 (
                 <div>
                 <form className="login" onSubmit={handleSubmit}>
+                  <h2>Login</h2>
                     <label>Email:</label>
                     <input
                         type="email"
-                        onChange={(event) => setEmail(event.target.value)}
+                        onChange={(event) => setLoginEmail(event.target.value)}
+                        value={loginEmail}
                     >
                     </input>
                     <label>Password:</label>
                     <input
                         type="password"
-                        onChange={(event) => setPassword(event.target.value)}
+                        onChange={(event) => setLoginPassword(event.target.value)}
+                        value={loginPassword}
                     >
                     </input>
                     <button type="submit">Login</button>
                 </form>
                     <form className="signup" onSubmit={handleRegistrationSubmit}>
+                      <h2>Sign Up</h2>
                     <label>Email:</label>
                     <input
                         type="email"
-                        onChange={(event) => setEmail(event.target.value)}
+                        onChange={(event) => setRegEmail(event.target.value)}
+                        value={regEmail}
                     ></input>
                     <label>Password:</label>
                     <input
                         type="password"
-                        onChange={(event) => setPassword(event.target.value)}
+                        onChange={(event) => setRegPassword(event.target.value)}
+                        value={regPassword}
                     ></input>
                     <label>Password Confirmation:</label>
                     <input
                         type="password"
-                        onChange={(event) => setPasswordConfirmation(event.target.value)}
+                        onChange={(event) => setRegPasswordConfirmation(event.target.value)}
+                        value={regPasswordConfirmation}
                     ></input>
                     <button type="submit">Sign Up</button>
                     </form>
