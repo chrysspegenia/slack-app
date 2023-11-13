@@ -43,7 +43,7 @@ const Textbox = (props) => {
                 setShouldScrollToBottom(true)
             },100);
 
-        setTimeout(() => clearInterval(delayedScroll), 500)
+        setTimeout(() => clearInterval(delayedScroll), 1000)
     }
 
     return (
@@ -91,8 +91,8 @@ const Textbox = (props) => {
                             type="submit"
                             onClick={() => showConversationArea 
                                             && handleSendMessage()
-                                            && setShouldUpdateDMList(true)
                                             && timeScrollBottom()
+                                            && setShouldUpdateDMList(true)
                                         }
                         >
                             <i className="fa-solid fa-paper-plane"></i>
