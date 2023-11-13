@@ -159,7 +159,7 @@
 
 .channels-container,
 .users-container{
-    height:26vh;
+    max-height:26vh;
     overflow-y:auto;
     overflow-x: hidden;
 }
