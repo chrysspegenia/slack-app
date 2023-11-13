@@ -138,7 +138,17 @@ const NavComms = (props) => {
            alert("Channel creation successful");
            console.log("Channel creation successful");
 
-           setChannels((prevChannels) => [...prevChannels, data.data]);
+           setChannels((prevChannels) => {
+            const newChannels = data.data;
+          //check if prevChannels is an array
+            if (Array.isArray(prevChannels)) {
+              return [...prevChannels, newChannels]; //if true add new channels
+            } else {
+
+              // if not an array return a new array with new channels
+              return [newChannels];
+            }
+          });
 
            setNewChannelName("");
            setNewChannelMembers("");
