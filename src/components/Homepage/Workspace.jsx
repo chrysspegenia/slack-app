@@ -19,6 +19,7 @@ const Workspace = (props) => {
     const [showConversationArea, setShowConversationArea] = useState(false);
 
     const [shouldScrollToBottom, setShouldScrollToBottom] = useState(false);
+    const [shouldUpdateDMList, setShouldUpdateDMList] = useState(false);
 
     const messageContent = useRef(null);
 
@@ -84,6 +85,7 @@ const Workspace = (props) => {
                 handleDisplayConversation={handleDisplayConversation}
                 showConversationArea={showConversationArea}
                 setShouldScrollToBottom={setShouldScrollToBottom}
+                setShouldUpdateDMList={setShouldUpdateDMList}
             ></Textbox>
             <MessageArea
                 user={user}
@@ -109,6 +111,8 @@ const Workspace = (props) => {
                 setShowSearchUserInput={setShowSearchUserInput}
                 setShowConversationArea={setShowConversationArea}
                 handleMessageTargetDM={handleMessageTargetDM}
+                shouldUpdateDMList={shouldUpdateDMList}
+                setShouldUpdateDMList={setShouldUpdateDMList}
             ></NavComms>
         </div>
     );

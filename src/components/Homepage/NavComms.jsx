@@ -3,18 +3,18 @@ import './NavComms.css'
 import axios from "axios";
 
 const NavComms = (props) => {
-    const {channels, setChannels, user, API_URL, setMessageTarget, setMessageAreaName, directMessageUsers, setDirectMessageUsers, setShowSearchUserInput, setShowConversationArea, handleMessageTargetDM} = props
+    const {channels, setChannels, user, API_URL, setMessageTarget, setMessageAreaName, directMessageUsers, setDirectMessageUsers, setShowSearchUserInput, setShowConversationArea, handleMessageTargetDM, shouldUpdateDMList, setShouldUpdateDMList} = props
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newChannelName, setNewChannelName] = useState("");
     const [newChannelMembers, setNewChannelMembers] = useState("");
 
-    const openModal = () => {
-        setIsModalOpen(true);
-      };
+    const [usersDM, setUsersDM] = useState([]) 
+
     
-      const closeModal = () => {
-        setIsModalOpen(false);
-      };
+    useEffect( ()=> {
+        getExistingUsersDM()
+        setShouldUpdateDMList(false)
+    }, [directMessageUsers, shouldUpdateDMList])
 
     useEffect(() => {
         if (user) {
@@ -25,6 +25,14 @@ const NavComms = (props) => {
     useEffect(() => {
             getUsers();
     }, [user]);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+      };
+    
+      const closeModal = () => {
+        setIsModalOpen(false);
+      };
 
     async function getChannels(){
         try {
@@ -68,13 +76,6 @@ const NavComms = (props) => {
             }
         }
     }
-
-    const [usersDM, setUsersDM] = useState([]) 
-
-    //need better dependency
-    useEffect( ()=> {
-        getExistingUsersDM()  
-    }, [directMessageUsers])
 
     // //function to loop over all accounts id's to retrieve accounts that has sent message to user
     async function getExistingUsersDM() {

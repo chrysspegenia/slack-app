@@ -3,7 +3,7 @@ import './Textbox.css';
 
 const Textbox = (props) => {
 
-    const {sendMessage, setSendMessage, user, API_URL, messageTarget, showConversationArea, setShouldScrollToBottom} = props
+    const {sendMessage, setSendMessage, user, API_URL, messageTarget, showConversationArea, setShouldScrollToBottom, setShouldUpdateDMList} = props
 
     async function handleSendMessage(){
         
@@ -91,6 +91,7 @@ const Textbox = (props) => {
                             type="submit"
                             onClick={() => showConversationArea 
                                             && handleSendMessage()
+                                            && setShouldUpdateDMList(true)
                                             && timeScrollBottom()
                                         }
                         >
