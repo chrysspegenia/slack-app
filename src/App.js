@@ -3,7 +3,7 @@ import './App.css';
 import React from 'react';
 import { useState } from "react";
 import Homepage from './pages/Homepage';
-import Login from './pages/login';
+import Login from './pages/Login';
 
 function App() {
   const [user, setUser] = useState(

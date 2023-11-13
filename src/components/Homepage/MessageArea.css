@@ -108,7 +108,7 @@
     height: 300px;
     position: absolute;
     top: 5%;
-    left: 75%;
+    left: 69%;
     padding: 15px;
     border-radius: 15px;
     background-color:#23282d;
@@ -123,7 +123,7 @@
 .channel-members-modal-headers h2{
     width: 100%;
     margin: 0;
-    padding-left: 50px;
+    padding-left: 100px;
     padding-bottom: 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.45);
 }
@@ -146,4 +146,21 @@
     background-color: transparent;
     border-radius: 15px;
     border: 2px solid white;
+}
+
+.channel-members-modal-content input{
+    width: 84%;
+}
+
+.channel-members-modal-content button{
+    cursor: pointer;
+}
+.channel-members-section{
+    background-color: transparent;
+    border-radius: 5px;
+    border: 1px solid white;
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
 }

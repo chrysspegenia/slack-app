@@ -1,11 +1,12 @@
 {
-  "name": "slack-app",
+  "name": "slack-api",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "axios": "^1.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.16.0",
     "react-scripts": "5.0.1",
     "react-test-renderer": "^18.2.0",
     "web-vitals": "^2.1.4"
@@ -37,11 +38,19 @@
   "devDependencies": {
     "@babel/core": "^7.23.3",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@babel/preset-modules": "^0.1.6",
+    "@babel/preset-env": "^7.23.3",
+    "@babel/preset-react": "^7.23.3",
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.1.0",
     "@testing-library/user-event": "^14.5.1",
     "babel-jest": "^29.7.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
   }
 }
