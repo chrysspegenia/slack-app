@@ -78,43 +78,83 @@ const NavComms = (props) => {
     }
 
     // //function to loop over all accounts id's to retrieve accounts that has sent message to user
-    async function getExistingUsersDM() {
-        let uniqueReceiverID = [];
+    // async function getExistingUsersDM() {
+    //     let uniqueReceiverID = [];
     
-        try {
-            await Promise.all(
-                directMessageUsers.map(async (account) => {
-                    const response = await axios.get(`${API_URL}/messages?receiver_id=${account.id}&receiver_class=User`, {
-                        headers: {
-                            "access-token": user.accessToken,
-                            client: user.client,
-                            expiry: user.expiry,
-                            uid: user.uid
-                        }
-                    });
+    //     try {
+    //         await Promise.all(
+    //             directMessageUsers.map(async (account) => {
+    //                 const response = await axios.get(`${API_URL}/messages?receiver_id=${account.id}&receiver_class=User`, {
+    //                     headers: {
+    //                         "access-token": user.accessToken,
+    //                         client: user.client,
+    //                         expiry: user.expiry,
+    //                         uid: user.uid
+    //                     }
+    //                 });
                     
+    //                 const users = response.data.data;
+    //                 if (users.length !== 0) {
+    //                     const receiverInfo = Array.from(new Set(users.flatMap(messageInfo => messageInfo.receiver)));
+    //                         uniqueReceiverID.push(...receiverInfo);
+    //                 }
+    //             })
+    //         );
+
+    //         let uniqueReceiversMap = new Map();
+
+    //         uniqueReceiverID.forEach(obj => {
+    //             uniqueReceiversMap.set(obj.uid, obj);
+    //           });
+    
+    //         let uniqueArrayOfObjects = Array.from(uniqueReceiversMap.values());
+
+    //         setUsersDM(uniqueArrayOfObjects);
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
+
+    async function getExistingUsersDM() {
+        try {
+            const uniqueReceiverID = await Promise.all(
+                directMessageUsers.map(async (account) => {
+                    const response = await axios.get(`${API_URL}/messages?receiver_id=${account.id}&receiver_class=User`,
+                        {
+                            headers: {
+                                "access-token": user.accessToken,
+                                client: user.client,
+                                expiry: user.expiry,
+                                uid: user.uid,
+                            },
+                        }
+                    );
+    
                     const users = response.data.data;
                     if (users.length !== 0) {
-                        const receiverInfo = Array.from(new Set(users.flatMap(messageInfo => messageInfo.receiver)));
-                            uniqueReceiverID.push(...receiverInfo);
+                        const receiverInfo = Array.from(
+                            new Set(users.flatMap((messageInfo) => messageInfo.receiver))
+                        );
+                        return receiverInfo;
+                    } else {
+                        return [];
                     }
                 })
             );
-
-            let uniqueReceiversMap = new Map();
-
-            uniqueReceiverID.forEach(obj => {
-                uniqueReceiversMap.set(obj.uid, obj);
-              });
     
-            let uniqueArrayOfObjects = Array.from(uniqueReceiversMap.values());
-
+            const uniqueReceiverIDs = uniqueReceiverID.flat();
+            const uniqueReceiversMap = new Map();
+    
+            uniqueReceiverIDs.forEach((obj) => {
+                uniqueReceiversMap.set(obj.uid, obj);
+            });
+    
+            const uniqueArrayOfObjects = Array.from(uniqueReceiversMap.values());
             setUsersDM(uniqueArrayOfObjects);
         } catch (error) {
             console.error(error);
         }
     }
-
 
     const createNewChannel = async () => {
         try {
