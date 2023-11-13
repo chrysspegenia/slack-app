@@ -1,12 +1,14 @@
 import {useState, useEffect} from 'react';
 import './NavComms.css'
 import axios from "axios";
+import Loading from './Loading';
 
 const NavComms = (props) => {
     const {channels, setChannels, user, API_URL, setMessageTarget, setMessageAreaName, directMessageUsers, setDirectMessageUsers, setShowSearchUserInput, setShowConversationArea, handleMessageTargetDM, shouldUpdateDMList, setShouldUpdateDMList} = props
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newChannelName, setNewChannelName] = useState("");
     const [newChannelMembers, setNewChannelMembers] = useState("");
+    const [loading, setLoading] = useState(true);
 
     const [usersDM, setUsersDM] = useState([]) 
 
@@ -117,6 +119,8 @@ const NavComms = (props) => {
 
     async function getExistingUsersDM() {
         try {
+            setLoading(true);
+
             const uniqueReceiverID = await Promise.all(
                 directMessageUsers.map(async (account) => {
                     const response = await axios.get(`${API_URL}/messages?receiver_id=${account.id}&receiver_class=User`,
@@ -153,11 +157,15 @@ const NavComms = (props) => {
             setUsersDM(uniqueArrayOfObjects);
         } catch (error) {
             console.error(error);
+        } finally {
+            setLoading(false)
         }
     }
 
     const createNewChannel = async () => {
         try {
+            setLoading(true);
+
           const response = await axios.post(`${API_URL}/channels`, {
             name: newChannelName,                                               //interpret in base 10
             user_ids: newChannelMembers.split(',').map(id => parseInt(id.trim(), 10)), //cleanup and convert string to interger
@@ -207,6 +215,8 @@ const NavComms = (props) => {
         closeModal();
         setNewChannelName("");
         setNewChannelMembers("");
+        } finally {
+            setLoading(false)
         }
     };
 
@@ -272,7 +282,11 @@ const NavComms = (props) => {
                     </div>
                     <div className='channels-container'>
                         {/* added channels here */}
-                        {channels && channels.map((channel) => {
+                        {
+                            loading ? (
+                                <Loading />
+                            ) :(
+                        channels && channels.map((channel) => {
                                 const {id, name} = channel;
                                 return (
                                     <div className='channels' key={id}
@@ -281,8 +295,9 @@ const NavComms = (props) => {
                                         >
                                         <p>{name}</p>
                                     </div>
-                                    )
-                                })
+                                      )
+                                    })
+                                )
                             }
                             {/* if account has no channels this will display */}
                             { !channels && <div className='channels'>No channels yet</div> }  
@@ -346,19 +361,26 @@ const NavComms = (props) => {
                         })}
                     </div> */}
                     <div className='users-container'>
-                        {usersDM && usersDM.map((receiver) => {
-                            const{id, email} = receiver;
-                                return (
-                                    <div 
-                                        className="user" 
-                                        key={id}
-                                        onClick={() => handleMessageTargetDM(receiver)}
-                                        >
-                                            <p>{email}</p>
-                                            <p>{id}</p>
-                                    </div>
-                                )
-                        })}
+                        {
+                            loading ? (
+                                <Loading />
+                            ) :(
+                                usersDM && usersDM.map((receiver) => {
+                                    const{id, email} = receiver;
+                                        return (
+                                            <div 
+                                                className="user" 
+                                                key={id}
+                                                onClick={() => handleMessageTargetDM(receiver)}
+                                                >
+                                                    <p>{email}</p>
+                                                    <p>{id}</p>
+                                            </div>
+                                        )
+                                })
+                            )
+                        }
+                       
                     </div>
                 </div>
             </div>
