@@ -1,8 +1,12 @@
 import React from 'react';
 import './Navbar.css'
 import workspaceLogo from '../../assets/images/slack-logo.png'
+import ProfileModal from './ProfileModal';
 
-const Navbar = () => {
+const Navbar = (props) => {
+
+    const {setIsLoggedIn, user} = props
+
     return (
         <div className='navbar-section'>
             <div className='navbar-icons-container'>
@@ -29,6 +33,8 @@ const Navbar = () => {
                     <span className='icon-text'>More</span>
                 </div>
             </div>
+
+            <ProfileModal setIsLoggedIn={setIsLoggedIn} user={user}></ProfileModal>
 
             <div className='user-profile-section'>
                 <i className="create-new-icon fa-solid fa-plus"></i>

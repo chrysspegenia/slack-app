@@ -9,16 +9,16 @@ import { API_URL } from "../constants/Constants";
 const Homepage = (props) => {
     const { setIsLoggedIn, user, setUser } = props;
     
-        function logout(){
-            localStorage.clear();
-            setIsLoggedIn(false);
-        }
+        // function logout(){
+        //     localStorage.clear();
+        //     setIsLoggedIn(false);
+        // }
 
     return (
         <div className='homepage'>
-            <button onClick={logout}>Logout</button>
+            {/* <button onClick={logout}>Logout</button> */}
             <SearchBox></SearchBox>
-            <Navbar></Navbar>
+            <Navbar setIsLoggedIn={setIsLoggedIn} user={user}></Navbar>
             <Workspace
                 user={user}
                 setUser={setUser}
