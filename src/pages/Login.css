@@ -1,7 +1,7 @@
 .login-page-main-container {
     height: 100%;
     width: 100%;
-    background:linear-gradient(45deg,rgb(108, 37, 37), rgb(27, 27, 110));
+    background:black;
     color: white;
     overflow: hidden;
 }
@@ -16,6 +16,7 @@
 
 .login-form,
 .signup-form{
+    background-color: rgba(0, 0, 0, 0.568);
     width:400px;
     height:300px;
     display: flex;
@@ -24,6 +25,9 @@
     padding: 10px 20px;
     border: 2px solid white;
     border-radius:12px;
+    z-index: 10;
+    position: absolute;
+    top:calc(50% - 120px)
 }
 
 .signup-form{
@@ -32,8 +36,9 @@
 
 h1 {
     font-size: 200px;
-    font-weight: 400;
+    font-weight: 600;
     margin: 0;
+    z-index: 11;
 }
 
 .signup-form h2,
@@ -80,6 +85,7 @@ h1 {
 
 .form-divider{
     position:relative;
+    z-index: 000000;
 }
 
 .signup-form .form-divider{

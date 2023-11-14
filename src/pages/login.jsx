@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Homepage from "./Homepage";
 import { API_URL } from '../constants/Constants';
 import axios from 'axios';
+import Parallax from "./Parallax";
 
 function Login(props){
     const { user, setUser } = props;
@@ -96,7 +97,7 @@ function Login(props){
 
     return (
         <div className="login-page-main-container">
-             
+            {!isLoggedIn && <Parallax />}
             <div className="login-container">
             {!isLoggedIn && <h1>Slack</h1>}    
 
