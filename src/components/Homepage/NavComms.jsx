@@ -282,23 +282,15 @@ const NavComms = (props) => {
                     </div>
                     <div className='channels-container'>
                         {/* added channels here */}
-                        {
-                            loading ? (
-                                <Loading />
-                            ) :(
-                        channels && channels.map((channel) => {
-                                const {id, name} = channel;
-                                return (
-                                    <div className='channels' key={id}
-                                        // onClick={() => handleMessageTarget(channel)}
-                                        onClick={() => handleMessageTargetChannel(channel)}
-                                        >
-                                        <p>{name}</p>
-                                    </div>
-                                      )
-                                    })
-                                )
-                            }
+                        {loading && <Loading />}
+                            {channels && channels.map((channel) => {
+                            const { id, name } = channel;
+                            return (
+                             <div className='channels' key={id} onClick={() => handleMessageTargetChannel(channel)}>
+                            <p>{name}</p>
+                    </div>
+                            );
+                            })}
                             {/* if account has no channels this will display */}
                             { !channels && <div className='channels'>No channels yet</div> }  
                     </div>
@@ -361,11 +353,8 @@ const NavComms = (props) => {
                         })}
                     </div> */}
                     <div className='users-container'>
-                        {
-                            loading ? (
-                                <Loading />
-                            ) :(
-                                usersDM && usersDM.map((receiver) => {
+                    {loading && <Loading />}
+                                {usersDM && usersDM.map((receiver) => {
                                     const{id, email} = receiver;
                                         return (
                                             <div 
@@ -376,11 +365,8 @@ const NavComms = (props) => {
                                                     <p>{email}</p>
                                                     <p>{id}</p>
                                             </div>
-                                        )
-                                })
-                            )
-                        }
-                       
+                                          );
+                                        })}
                     </div>
                 </div>
             </div>
