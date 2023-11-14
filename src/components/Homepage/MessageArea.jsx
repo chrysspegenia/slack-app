@@ -141,12 +141,19 @@ const MessageArea = (props) => {
                 {displayConversation && displayConversation.map((message) => {
 
                     const {id, body, sender, created_at} = message;
+
+                    const date = created_at.slice(0, 10);
+                    const time = created_at.slice(12, 16);
+                    
                     return(
                         <div className="message-container" key={id}>
                             <i className="user-icon fa-regular fa-user"></i>
                             <div className='message-info'>
                                 <div className='message-sender'>{sender.uid}</div>
-                                <div className='message-timestamp'>{created_at}</div>
+                                <div className='message-timestamp'>
+                                  <div>{time}</div>
+                                  <div>{date}</div>
+                                </div>
                             </div>
                             <div className='message'>{body}</div>
                         </div>

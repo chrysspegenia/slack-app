@@ -84,6 +84,9 @@
 .message-timestamp{
     font-size:12px;
     line-height:0.75rem;
+    display: flex;
+    gap:10%;
+    width:100px;
 }
 
 .message{
