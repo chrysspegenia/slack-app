@@ -21,7 +21,6 @@ const Parallax = () => {
 
     window.addEventListener('mousemove', handleMouseMove);
 
-    // Animate elements into their final positions after a short delay
     
 
     return () => {
@@ -32,10 +31,10 @@ const Parallax = () => {
 
   return (
     <div className='parallax-container'>
-      <img className='parallax bg-img' src='/bg-login.png' data-speedx={0.18} data-speedy={0.18} alt='background' />
+      <img className='parallax bg-img' src='/bg-login.png' data-speedx={0.15} data-speedy={0.15} alt='background' />
       <img className='parallax earth-img' src='/earth.png' data-speedx={0.13} data-speedy={0.13} alt='background' />
       <img className='parallax surface-img' src='/surface.png' data-speedx={0.1} data-speedy={0.1} alt='background' />
-      <img className='parallax mars-img' src='/mars.png' data-speedx={0.22} data-speedy={0.22} alt='background' />
+      <img className='parallax mars-img' src='/mars.png' data-speedx={0.19} data-speedy={0.19} alt='background' />
     </div>
   );
 };
