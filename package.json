@@ -51,6 +51,16 @@
   "jest": {
     "moduleNameMapper": {
       "axios": "axios/dist/node/axios.cjs"
-    }
-  }
+    },
+    "testMatch": [
+      "<rootDir>/src/**/*.test.js",
+      "<rootDir>/src/**/*.test.jsx",
+      "<rootDir>/src/**/*.test.ts",
+      "<rootDir>/src/**/*.test.tsx",
+      "<rootDir>/tests/**/*.test.js",
+      "<rootDir>/tests/**/*.test.jsx",
+      "<rootDir>/tests/**/*.test.ts",
+      "<rootDir>/tests/**/*.test.tsx"
+    ]
+  } 
 }

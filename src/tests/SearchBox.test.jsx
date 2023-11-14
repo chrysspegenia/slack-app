@@ -1,6 +1,6 @@
 import { act } from 'react-dom/test-utils';
 import { render, screen } from '@testing-library/react';
-import SearchBox from "./SearchBox";
+import SearchBox from "../components/Homepage/SearchBox";
 
 test ("render SearchBox", () => {
     render(<SearchBox />);
