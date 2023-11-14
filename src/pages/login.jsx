@@ -15,6 +15,7 @@ function Login(props){
     const [regPassword, setRegPassword] = useState("");
     const [regPasswordConfirmation, setRegPasswordConfirmation] = useState("");
 
+    const [showSignUpForm, setShowSignUpForm] = useState(false)
 
     useEffect(() => {
         if(user){
@@ -95,54 +96,84 @@ function Login(props){
 
     return (
         <div className="login-page-main-container">
-             {!isLoggedIn && <h1>Slack</h1>}    
+             
             <div className="login-container">
-            { 
-                !isLoggedIn &&
-                (
-                <div>
-                <form className="login" onSubmit={handleSubmit}>
-                  <h2>Login</h2>
-                    <label>Email:</label>
+            {!isLoggedIn && <h1>Slack</h1>}    
+
+        { !isLoggedIn && !showSignUpForm &&
+                <form className="login-form" onSubmit={handleSubmit}>
+                  {/* <h2>Login</h2> */}
+                    {/* <label>Email:</label> */}
                     <input
+                        className="input-login"
                         type="email"
+                        placeholder="Email"
                         onChange={(event) => setLoginEmail(event.target.value)}
                         value={loginEmail}
                     >
                     </input>
-                    <label>Password:</label>
+                    {/* <label>Password:</label> */}
                     <input
+                        className="input-login"
                         type="password"
+                        placeholder="Password"
                         onChange={(event) => setLoginPassword(event.target.value)}
                         value={loginPassword}
                     >
                     </input>
-                    <button type="submit">Login</button>
+                    <button className="login-form-btn" type="submit">Login</button>
+
+                    <span className="form-divider"></span>
+
+                    <div className="swap-modal-btn"
+                        onClick={() => setShowSignUpForm(true)}
+                    >
+                        Create new account
+                    </div>
                 </form>
-                    <form className="signup" onSubmit={handleRegistrationSubmit}>
+            }
+
+            {!isLoggedIn && showSignUpForm &&
+                <form className="signup-form" onSubmit={handleRegistrationSubmit}>
                       <h2>Sign Up</h2>
-                    <label>Email:</label>
+                      <span>It's quick and easy</span>
+                    {/* <label>Email:</label> */}
                     <input
+                        className="input-signup"
                         type="email"
+                        placeholder="Email"
                         onChange={(event) => setRegEmail(event.target.value)}
                         value={regEmail}
                     ></input>
-                    <label>Password:</label>
+                    {/* <label>Password:</label> */}
                     <input
+                        className="input-signup"
                         type="password"
+                        placeholder="Password"
                         onChange={(event) => setRegPassword(event.target.value)}
                         value={regPassword}
                     ></input>
-                    <label>Password Confirmation:</label>
+                    {/* <label>Password Confirmation:</label> */}
                     <input
+                        className="input-signup"
                         type="password"
+                        placeholder="Confirm Password"
                         onChange={(event) => setRegPasswordConfirmation(event.target.value)}
                         value={regPasswordConfirmation}
                     ></input>
-                    <button type="submit">Sign Up</button>
+                    <button className="signup-form-btn" type="submit">Sign Up</button>
+
+                    <span className="form-divider"></span>
+
+                    <div 
+                        className="swap-modal-btn"
+                        onClick={() => setShowSignUpForm(false)}    
+                    >
+                        Back to login page
+                    </div>
                     </form>
-                </div>
-                )}
+                }
+
         {isLoggedIn && <Homepage setIsLoggedIn={setIsLoggedIn} user={user}></Homepage>}
       </div>
     </div>

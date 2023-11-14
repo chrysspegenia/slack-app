@@ -35,6 +35,9 @@ const Textbox = (props) => {
 
         } catch (error){
             alert(error)
+        } 
+        finally {
+            timeScrollBottom()
         }
     }
 
@@ -44,14 +47,6 @@ const Textbox = (props) => {
             },100);
 
         setTimeout(() => clearInterval(delayedScroll), 1000)
-    }
-
-    function submitEventFunctions(){
-        if(showConversationArea){
-            handleSendMessage()
-            setShouldUpdateDMList(true)
-            timeScrollBottom()
-        }
     }
 
     return (
@@ -97,7 +92,7 @@ const Textbox = (props) => {
                     <div className='confirm-btns'>
                         <div className='textbtn send-btn'
                             type="submit"
-                            onClick={submitEventFunctions}
+                            onClick={handleSendMessage}
                         >
                             <i className="fa-solid fa-paper-plane"></i>
                         </div>

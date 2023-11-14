@@ -32,6 +32,7 @@ const Workspace = (props) => {
     
     useEffect(() => {
         handleDisplayConversation()
+        console.log(shouldScrollToBottom)
     }, [receiver_id, sendMessage])
     //receiver_id changes when clicking a new channel or DM target
     //sendMessage changes when sending a message
@@ -61,8 +62,19 @@ const Workspace = (props) => {
             if(error){
                 return alert(error);
             }
-        }
+        }   
+        // finally {
+        //     timeScrollBottom()
+        // }
     }
+
+    // function timeScrollBottom(){
+    //     const delayedScroll = setInterval(() =>{
+    //             setShouldScrollToBottom(true)
+    //         },100);
+
+    //     setTimeout(() => clearInterval(delayedScroll), 1000)
+    // }
 
     function handleMessageTargetDM(user){
         setShowSearchUserInput(false)

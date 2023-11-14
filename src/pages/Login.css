@@ -3,48 +3,32 @@
     width: 100%;
     background:linear-gradient(45deg,rgb(108, 37, 37), rgb(27, 27, 110));
     color: white;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
     overflow: hidden;
 }
 
 .login-container{
     height: 100vh;
     width: 100%;
-}
-
-.login{
-    height: 150px;
-    width: 200px;
-    justify-content: center;
-    text-align: center;
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    border: 2px solid white;
-    position: absolute;
-    top: 50%;
-    left: 40%;
-    transform: translate(-50%, -50%);
+    align-items: center;
 }
 
-.signup{
-    height: 200px;
-    width: 200px;
-    justify-content: center;
-    text-align: center;
+.login-form,
+.signup-form{
+    width:400px;
+    height:300px;
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    justify-content: space-around;
+    padding: 10px 20px;
     border: 2px solid white;
-    position: absolute;
-    top: 50%;
-    left: 60%;
-    transform: translate(-50%, -50%);
+    border-radius:12px;
 }
 
+.signup-form{
+    height:400px;
+}
 
 h1 {
     font-size: 200px;
@@ -52,12 +36,62 @@ h1 {
     margin: 0;
 }
 
-.login h2{
+.signup-form h2,
+.signup-form span{
+    text-align: left;
+    font-size: 25px;
     margin: 0;
-    padding-bottom: 10px;
+    padding-left:20px;
+    font-weight:600px;
 }
 
-.signup h2{
-    margin: 0;
-    padding-bottom: 10px;
+.signup-form span{
+    font-size:15px;
+    margin-top:-10px;
+}
+
+.input-login,
+.input-signup{
+    padding:14px 16px;
+    font-size: 17px;
+    line-height:16px;
+    border-radius:6px;
+}
+
+.login-form-btn,
+.signup-form-btn,
+.swap-modal-btn{
+    padding:0 16px;
+    font-size:20px;
+    line-height: 36px;
+    border-radius:6px;
+    color:white;
+    background-color: #1877f2;
+    border:none;
+    cursor:pointer;
+}
+
+.swap-modal-btn{
+    align-self: center;
+    text-align: center;
+    width:60%;
+    background-color:#42b72a;
+}
+
+.form-divider{
+    position:relative;
+}
+
+.signup-form .form-divider{
+    margin: 10px 0;
+}
+
+.form-divider::after{
+    content:"";
+    position: absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:1px;
+    background:white;
 }
