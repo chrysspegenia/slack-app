@@ -143,7 +143,7 @@ const MessageArea = (props) => {
                     const {id, body, sender, created_at} = message;
 
                     const date = created_at.slice(0, 10);
-                    const time = created_at.slice(12, 16);
+                    const time = created_at.slice(11, 16);
                     
                     return(
                         <div className="message-container" key={id}>
