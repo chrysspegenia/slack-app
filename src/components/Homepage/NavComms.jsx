@@ -84,6 +84,9 @@ const NavComms = (props) => {
     //     let uniqueReceiverID = [];
     
     //     try {
+
+    //         setLoading(true);
+
     //         await Promise.all(
     //             directMessageUsers.map(async (account) => {
     //                 const response = await axios.get(`${API_URL}/messages?receiver_id=${account.id}&receiver_class=User`, {
@@ -96,7 +99,7 @@ const NavComms = (props) => {
     //                 });
                     
     //                 const users = response.data.data;
-    //                 if (users.length !== 0) {
+    //                 if (users.length >= 0) {
     //                     const receiverInfo = Array.from(new Set(users.flatMap(messageInfo => messageInfo.receiver)));
     //                         uniqueReceiverID.push(...receiverInfo);
     //                 }
@@ -114,7 +117,9 @@ const NavComms = (props) => {
     //         setUsersDM(uniqueArrayOfObjects);
     //     } catch (error) {
     //         console.error(error);
-    //     }
+    //     } finally {
+    //                 setLoading(false)
+    //             }
     // }
 
     async function getExistingUsersDM() {
@@ -135,7 +140,7 @@ const NavComms = (props) => {
                     );
     
                     const users = response.data.data;
-                    if (users.length !== 0) {
+                    if (users.length >= 0) {
                         const receiverInfo = Array.from(
                             new Set(users.flatMap((messageInfo) => messageInfo.receiver))
                         );

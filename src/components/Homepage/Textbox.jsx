@@ -7,6 +7,7 @@ const Textbox = (props) => {
 
     async function handleSendMessage(){
         
+        if(!showConversationArea) return;
         if(!sendMessage) return;
 
         try{
@@ -37,17 +38,18 @@ const Textbox = (props) => {
             alert(error)
         } 
         finally {
-            timeScrollBottom()
+            setShouldUpdateDMList(true)
+            // timeScrollBottom()
         }
     }
 
-    function timeScrollBottom(){
-        const delayedScroll = setInterval(() =>{
-                setShouldScrollToBottom(true)
-            },100);
+    // function timeScrollBottom(){
+    //     const delayedScroll = setInterval(() =>{
+    //             setShouldScrollToBottom(true)
+    //         },200);
 
-        setTimeout(() => clearInterval(delayedScroll), 1000)
-    }
+    //     setTimeout(() => clearInterval(delayedScroll), 4000)
+    // }
 
     return (
         <div className="textbox-section">

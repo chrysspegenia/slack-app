@@ -82,14 +82,14 @@ function Login(props){
         };
         const response = await axios.post(`${API_URL}/auth/`, registrationCredentials);
 
-        console.log("Registration successful!", response.data);
+        alert("Registration successful!", response.data);
 
         setRegEmail("");
         setRegPassword("");
         setRegPasswordConfirmation("");
     } catch (error) {
         if (error.response.data.errors) {
-            alert("Registration failed. Please check your input.");
+            alert("Registration failed. Account already exists.");
         }
     }
 }
