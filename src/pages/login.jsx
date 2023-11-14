@@ -52,6 +52,8 @@ function Login(props){
               })
 
               setIsLoggedIn(true);
+              setLoginEmail("");
+              setLoginPassword("");
           }
       } catch (error){
           if(error.response.data.errors) {
