@@ -144,7 +144,10 @@ const NavComms = (props) => {
                         const receiverInfo = Array.from(
                             new Set(users.flatMap((messageInfo) => messageInfo.receiver))
                         );
-                        return receiverInfo;
+                        const senderInfo = Array.from(
+                            new Set(users.flatMap((messageInfo) => messageInfo.sender))
+                        );
+                        return receiverInfo.concat(senderInfo);
                     } else {
                         return [];
                     }
